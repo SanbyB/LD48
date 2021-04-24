@@ -1,5 +1,7 @@
 import os.path
+import pygame
 
-IMAGE_PLAYER = os.path.join("Graphics", "Player.png")
+IMAGE_PLAYER = pygame.image.load(os.path.join("Graphics", "Player.png"))
 
+TILE_ROCK_00 = pygame.image.load(os.path.join("Graphics", "tiles", "Tile_12.png"))
 

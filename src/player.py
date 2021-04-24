@@ -26,6 +26,6 @@ class Player:
 
 
     def render(self, screen):
-        screen.blit(pygame.image.load(IMAGE_PLAYER), (self.x, self.y))
+        screen.blit(IMAGE_PLAYER, (self.x, self.y))
                 
 

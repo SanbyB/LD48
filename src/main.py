@@ -4,7 +4,6 @@ from world import World
 from player import Player
 from camera import Camera
 from entities.entity import Entity
-from maps.tile import renderTile, TILE_TYPES, createTileData
 from config import SCREEN_WIDTH, SCREEN_HEIGHT
 
 world = World()
@@ -22,7 +21,7 @@ while True: # main game loop
     # Clear the screen
     pygame.draw.rect(DISPLAYSURF, (0, 0, 0, 255), Rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT))
     world.update()
-    world.render(DISPLAYSURF)
+    world.render(DISPLAYSURF, cam)
     player.move()
     cam.move(player)
     player.render(DISPLAYSURF)

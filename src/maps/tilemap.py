@@ -1,7 +1,9 @@
 
 
-from maps.tile import renderTile, createTileData, TILE_TYPES
+from maps.tile import Rock, Air
 from math import ceil
+from config import SCREEN_WIDTH, SCREEN_HEIGHT
+import random
 
 TILE_MAP_WIDTH = 20
 TILE_SIZE = 30
@@ -14,14 +16,13 @@ class TileMap:
         return
 
     def render(self, surface, camera):
-        # TODO insert camera position here
-        xPos = 0
-        yPos = 0
-        xWidth = 640
-        yWidth = 480
+        xPos = camera.x
+        yPos = camera.y
+        xWidth = SCREEN_WIDTH
+        yHeight = SCREEN_HEIGHT
 
         # When camera is lower than what we've generated, generate more tiles
-        targetTileHeight = ceil((yPos + yWidth) / TILE_SIZE)
+        targetTileHeight = ceil((yPos + yHeight) / TILE_SIZE)
         if (targetTileHeight > len(self.tiles)):
             for x in range(targetTileHeight - len(self.tiles)):
                 self.generateRow()
@@ -30,10 +31,10 @@ class TileMap:
         # TODO we should only render tiles on screen
         for tileY in range(len(self.tiles)):
             for tileX in range(TILE_MAP_WIDTH):
-                xRender = (tileX * TILE_SIZE)
-                yRender = (tileY * TILE_SIZE) 
+                xRender = (tileX * TILE_SIZE) - xPos
+                yRender = (tileY * TILE_SIZE) - yPos
                 tile = self.tiles[tileY][tileX]
-                renderTile(surface, tile, xRender, yRender, TILE_SIZE)
+                tile.render(surface, xRender, yRender, TILE_SIZE, self.tiles)
         return
 
     
@@ -46,7 +47,10 @@ class TileMap:
         self.onGenerateListener(y)
 
     def generateTile(self, x, y):
-        return createTileData(TILE_TYPES["ROCK"])
+        value = random.uniform(0, 1)
+        tile = Rock(x, y) if value > 0.5 else Air(x, y)
+        return tile
+
         
 
 
