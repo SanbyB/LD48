@@ -5,8 +5,8 @@ from math import ceil, floor
 from config import SCREEN_WIDTH, SCREEN_HEIGHT
 import random
 
-TILE_MAP_WIDTH = 20
-TILE_SIZE = 50
+TILE_MAP_WIDTH = 100
+TILE_SIZE = 80
 
 class TileMap:
     def __init__(self, world, onGenerateListener):
@@ -66,10 +66,26 @@ class TileMap:
         xTilePos = floor(x / TILE_SIZE)
         yTilePos = floor(y / TILE_SIZE)
         if (xTilePos < 0 or xTilePos >= TILE_MAP_WIDTH):
-            return False
+            return True
         if (yTilePos < 0 or yTilePos >= len(self.tiles)):
             return False
         return self.tiles[yTilePos][xTilePos].doesCollide
+
+    def damageTile(self, x, y, amount):
+        xTilePos = floor(x / TILE_SIZE)
+        yTilePos = floor(y / TILE_SIZE)
+        if (xTilePos < 0 or xTilePos >= TILE_MAP_WIDTH):
+            return
+        if (yTilePos < 0 or yTilePos >= len(self.tiles)):
+            return
+        self.tiles[yTilePos][xTilePos].onDamage(amount)
+
+    def replaceTile(self, x, y, tile):
+        if (x < 0 or x >= TILE_MAP_WIDTH):
+            return
+        if (y < 0 or y >= len(self.tiles)):
+            return
+        self.tiles[y][x] = tile
         
 
 

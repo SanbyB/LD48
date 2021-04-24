@@ -1,6 +1,5 @@
 ### Todo
 
-* Player falling and colliding with the tiles 
 * Some sort of equipment / weapon which renders next to the player
 * Enemy entity which player can hit
 * Player needs to be able to destroy tiles with same attack
@@ -12,6 +11,8 @@
 * Inventory equipment
 * E opens inventory to upgrade equipment and takes iron away from total score
 * (Polish) We need a screen for when we die
+* (Polish) side walls for tiles
+* (Polish) speed up movement a lot
 
 ### Idea
 

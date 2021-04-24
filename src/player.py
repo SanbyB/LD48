@@ -57,3 +57,6 @@ class Player(Physics):
         super().onHitFloor()
         self.didJump = False
 
+        # TODO dRemove this
+        self.world.tileMap.damageTile(self.x, self.y + self.height + 20, 0.1)
+
