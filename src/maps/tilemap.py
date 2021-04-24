@@ -1,7 +1,7 @@
 
 
 from maps.tile import Rock, Air
-from math import ceil
+from math import ceil, floor
 from config import SCREEN_WIDTH, SCREEN_HEIGHT
 import random
 
@@ -27,14 +27,25 @@ class TileMap:
             for x in range(targetTileHeight - len(self.tiles)):
                 self.generateRow()
 
+        xTilePos = floor(xPos / TILE_SIZE)
+        yTilePos = floor(yPos / TILE_SIZE)
+        xTileWidth = ceil((xPos + xWidth) / TILE_SIZE)
+        yTileHeight = ceil((yPos + yHeight) / TILE_SIZE)
+
+        xTilePos = min(max(xTilePos, 0), TILE_MAP_WIDTH)
+        yTilePos = min(max(yTilePos, 0), len(self.tiles))
+        xTileWidth = min(max(xTileWidth, 0), TILE_MAP_WIDTH)
+        yTileHeight = min(max(yTileHeight, 0), len(self.tiles))
+
         # Draw the tiles
-        # TODO we should only render tiles on screen
-        for tileY in range(len(self.tiles)):
-            for tileX in range(TILE_MAP_WIDTH):
+        for tileY in range(yTilePos, yTileHeight):
+            for tileX in range(xTilePos, xTileWidth):
                 xRender = (tileX * TILE_SIZE) - xPos
                 yRender = (tileY * TILE_SIZE) - yPos
                 tile = self.tiles[tileY][tileX]
                 tile.render(surface, xRender, yRender, TILE_SIZE, self.tiles)
+
+        
         return
 
     
