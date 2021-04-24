@@ -8,9 +8,7 @@ from config import SCREEN_WIDTH, SCREEN_HEIGHT
 
 world = World()
 world.addEntity(Entity(world))
-
-player = Player(True)
-print(player.x_hit,player.y_hit)
+player = Player(world)
 cam = Camera()
 
 pygame.init()
@@ -21,12 +19,11 @@ while True: # main game loop
 
     # Clear the screen
     pygame.draw.rect(DISPLAYSURF, (0, 0, 0, 255), Rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT))
+    player.update()
+    cam.move(player)
+    player.render(DISPLAYSURF, cam)
     world.update()
     world.render(DISPLAYSURF, cam)
-    player.move()
-    player.gravity()
-    cam.move(player)
-    player.render(DISPLAYSURF)
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()

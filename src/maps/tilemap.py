@@ -6,10 +6,11 @@ from config import SCREEN_WIDTH, SCREEN_HEIGHT
 import random
 
 TILE_MAP_WIDTH = 20
-TILE_SIZE = 30
+TILE_SIZE = 50
 
 class TileMap:
-    def __init__(self, onGenerateListener):
+    def __init__(self, world, onGenerateListener):
+        self.world = world
         self.tiles = []
         self.onGenerateListener = onGenerateListener
         self.generateRow()
@@ -47,7 +48,6 @@ class TileMap:
 
         
         return
-
     
     def generateRow(self):
         y = len(self.tiles)
@@ -59,9 +59,17 @@ class TileMap:
 
     def generateTile(self, x, y):
         value = random.uniform(0, 1)
-        tile = Rock(x, y) if value > 0.5 else Air(x, y)
+        tile = Rock(self.world, x, y) if value > 0.5 else Air(self.world, x, y)
         return tile
 
+    def doesCollide(self, x, y):
+        xTilePos = floor(x / TILE_SIZE)
+        yTilePos = floor(y / TILE_SIZE)
+        if (xTilePos < 0 or xTilePos >= TILE_MAP_WIDTH):
+            return False
+        if (yTilePos < 0 or yTilePos >= len(self.tiles)):
+            return False
+        return self.tiles[yTilePos][xTilePos].doesCollide
         
 
 

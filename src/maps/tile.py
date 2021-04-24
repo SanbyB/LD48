@@ -3,16 +3,18 @@ from pygame import Rect
 from resources import TILE_ROCK_00
 
 class Tile:
-    def __init__(self, type, tileX, tileY):
+    def __init__(self, world, type, tileX, tileY, doesCollide):
+        self.world = world
         self.type = type
+        self.doesCollide = doesCollide
         return
 
     def render(self, surface, x, y, size, tiles):
         return
 
 class Rock(Tile):
-    def __init__(self, tileX, tileY):
-        super().__init__("ROCK", tileX, tileY)
+    def __init__(self, world, tileX, tileY):
+        super().__init__(world, "ROCK", tileX, tileY, True)
     
     def render(self, surface, x, y, size, tiles):
         scaledImage = pygame.transform.scale(TILE_ROCK_00, (size, size)) 
@@ -20,8 +22,8 @@ class Rock(Tile):
         return
 
 class Air(Tile):
-    def __init__(self, tileX, tileY):
-        super().__init__("Air", tileX, tileY)
+    def __init__(self, world, tileX, tileY):
+        super().__init__(world, "Air", tileX, tileY, False)
 
     def render(self, surface, x, y, size, tiles):
         return

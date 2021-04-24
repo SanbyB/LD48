@@ -5,7 +5,7 @@ class World:
         self.entities = []
         self.toAdd = []
         self.toRemove = []
-        self.tileMap = TileMap(self.onGenerateListener)
+        self.tileMap = TileMap(self, self.onGenerateListener)
 
 
     def update(self):  
