@@ -19,10 +19,10 @@ class World:
             entity.update()
 
 
-    def render(self, surface):   
-        self.tileMap.render(surface, "camera") 
+    def render(self, surface, camera):   
+        self.tileMap.render(surface, camera) 
         for entity in self.entities:
-            entity.render()
+            entity.render(surface, camera)
 
     def addEntity(self, entity):
         self.toAdd.append(entity)

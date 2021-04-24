@@ -8,6 +8,6 @@ class Entity:
         return
         # print("update")
 
-    def render(self):
+    def render(self, surface, camera):
         return
         # print("render")
