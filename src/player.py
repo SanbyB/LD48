@@ -1,14 +1,14 @@
 import pygame
 from resources import IMAGE_PLAYER
+from physics import Physics
 
-class Player:
+
+class Player(Physics):
     def __init__(self, collision):
-        self.x, self.y = 0, 0
-        self.x_vel = 2
-        self.y_vel = 1
-        self.hp = 10
+        super().__init__(collision)
         self.invtry = []
-        self.collision = collision
+        self.x_vel = 2
+        self.x_hit, self.y_hit = self.hit_box(IMAGE_PLAYER)
 
 
     def move(self):
@@ -26,26 +26,7 @@ class Player:
         if keys[pygame.K_s]:
             self.y += self.x_vel
 
-
-    def gravity(self, collision):
-        keys = pygame.key.get_pressed()
-
-        if not collision:
-            grav_accn = 0.05
-            self.y_vel += grav_accn
-
-        else:
-            if keys[pygame.K_SPACE]:
-                self.y_vel = -5
-
-            else:
-                self.y_vel = 0
         
-        self.y += self.y_vel
-
-        
-
-
     def render(self, screen):
         screen.blit(IMAGE_PLAYER, (self.x, self.y))
                 

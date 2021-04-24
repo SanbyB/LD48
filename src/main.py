@@ -10,8 +10,8 @@ world = World()
 world.addEntity(Entity(world))
 
 player = Player(True)
+print(player.x_hit,player.y_hit)
 cam = Camera()
-collision = False
 
 pygame.init()
 DISPLAYSURF = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
@@ -24,11 +24,7 @@ while True: # main game loop
     world.update()
     world.render(DISPLAYSURF, cam)
     player.move()
-    if player.y > 250:
-        collision = True
-    else:
-        collision = False
-    player.gravity(collision)
+    player.gravity()
     cam.move(player)
     player.render(DISPLAYSURF)
     for event in pygame.event.get():
