@@ -19,5 +19,7 @@ def createTileData(type):
 # y - the y position on screen px
 # size - the size of the tile px
 def renderTile(surface, tileData, x, y, size): 
-    pygame.draw.rect(surface, (255, 0, 0, 255), Rect(x, y, size, size))
+    pygame.draw.rect(surface, (255, 0, 0), Rect(x, y, size, size))
+    pygame.draw.rect(surface, (255, 255, 255), Rect(x, y, size, size), 3)
+
     

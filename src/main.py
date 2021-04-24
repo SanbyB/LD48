@@ -17,7 +17,7 @@ while True: # main game loop
     # Clear the screen
     pygame.draw.rect(DISPLAYSURF, (0, 0, 0, 255), Rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT))
     world.update()
-    world.render()
+    world.render(DISPLAYSURF)
 
     for event in pygame.event.get():
         if event.type == QUIT:
