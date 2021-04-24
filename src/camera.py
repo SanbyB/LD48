@@ -7,4 +7,3 @@ class Camera:
     def move(self, player):
         self.x = player.x
         self.y = player.y
-        print(self.x, self.y)
