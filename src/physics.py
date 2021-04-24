@@ -4,7 +4,6 @@ class Physics:
     def __init__(self, x, y, width, height):
         self.x, self.y = x, y
         self.width, self.height = width, height
-        self.x_hit, self.y_hit = 0, 0 
         self.x_vel = 0
         self.y_vel = 0
         self.grav = 0.3
@@ -17,11 +16,6 @@ class Physics:
 
     def gravity(self):
         self.y_vel += self.grav
-
-    
-    def hit_box(self, name):
-        im_size = name.get_width(), name.get_height()
-        return im_size
 
 
     def resolveCollisions(self):

@@ -35,7 +35,7 @@ class World:
     # We should generate enemies and things in this function
     # Index, measured in tile count of how deep the world is 
     def onGenerateListener(self, index):
-        print("Generated world", index, "deep")
+        #print("Generated world", index, "deep")
         return
 
 

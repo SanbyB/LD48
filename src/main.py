@@ -7,7 +7,7 @@ from entities.entity import Entity
 from config import SCREEN_WIDTH, SCREEN_HEIGHT
 
 world = World()
-world.addEntity(Entity(world))
+world.addEntity(Entity(4000, 0, 50, 50, world, 20))
 player = Player(world)
 cam = Camera()
 
@@ -21,10 +21,23 @@ while True: # main game loop
     dt = clock.tick(60)
     # Clear the screen
     pygame.draw.rect(DISPLAYSURF, (0, 0, 0, 255), Rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT))
-    player.update()
+    player.update(cam)
     cam.move(player)
     player.render(DISPLAYSURF, cam)
     world.update()
+
+    #######
+    
+    theta = player.attack(cam)
+
+    for entity in world.entities:
+        theta0, theta1 = entity.ray(cam)
+
+        if theta0 < theta < theta1:
+            print('hit')
+
+    ########
+
     world.render(DISPLAYSURF, cam)
     for event in pygame.event.get():
         if event.type == QUIT:
