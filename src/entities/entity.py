@@ -1,10 +1,13 @@
 
 class Entity:
     def __init__(self, world):
-        print("Hello")
+        return
+        # print("Hello")
 
     def update(self):
-        print("update")
+        return
+        # print("update")
 
     def render(self):
-        print("render")
+        return
+        # print("render")
