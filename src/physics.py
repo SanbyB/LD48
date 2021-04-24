@@ -44,7 +44,7 @@ class Physics:
         # Does top collide
         if self.y_vel < 0 and self.world.tileMap.doesCollide(self.x + self.width / 2, self.y + self.y_vel):
             self.y_vel = -self.y_vel
-            self.onHitFloor()
+            self.onHitRoof()
 
         return
 
