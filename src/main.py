@@ -17,6 +17,8 @@ pygame.display.set_caption('Hello World!')
 
 clock = pygame.time.Clock()
 
+theta0, theta1 = 0, 0
+
 while True: # main game loop
     dt = clock.tick(60)
     # Clear the screen
@@ -25,20 +27,17 @@ while True: # main game loop
     cam.move(player)
     player.render(DISPLAYSURF, cam)
     world.update()
-
-    #######
-    
-    theta = player.attack(cam)
-
-    for entity in world.entities:
-        theta0, theta1 = entity.ray(cam)
-
-        if theta0 < theta < theta1:
-            print('hit')
-
-    ########
-
     world.render(DISPLAYSURF, cam)
+
+    theta = player.attack(cam)
+    if theta != -100:
+        for entity in world.entities:
+            theta0, theta1 = entity.ray(cam)
+
+            if theta0 < theta < theta1 or theta1 < theta < theta0:
+                print('hit')
+        
+
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()

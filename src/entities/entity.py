@@ -25,8 +25,8 @@ class Entity(Physics):
     def ray(self, camera):
         # Targeting the entity
 
-        xPos = self.x - camera.x - SCREEN_WIDTH/2
-        yPos = -(self.y - camera.y) + SCREEN_HEIGHT/2
+        xPos = self.x - camera.x - SCREEN_WIDTH/2 + self.width/2
+        yPos = -(self.y - camera.y) + SCREEN_HEIGHT/2 - self.width/2
 
         '''
         The positive, positive quadrant and the negative, negative quadrant 
@@ -44,6 +44,7 @@ class Entity(Physics):
 
         theta0 = np.angle(-x0 - y0 * 1j) + np.pi
         theta1 = np.angle(-x1 - y1 * 1j) + np.pi
+
 
         return theta0, theta1
 
