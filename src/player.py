@@ -1,5 +1,5 @@
 import pygame
-
+from resources import IMAGE_PLAYER
 
 class Player:
     def __init__(self):
@@ -26,6 +26,6 @@ class Player:
 
 
     def render(self, screen):
-        screen.blit(pygame.image.load(r'LD48\Graphics\Player.png'), (self.x, self.y))
+        screen.blit(pygame.image.load(IMAGE_PLAYER), (self.x, self.y))
                 
 
