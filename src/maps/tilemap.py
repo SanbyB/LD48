@@ -23,7 +23,7 @@ class TileMap:
         yHeight = SCREEN_HEIGHT
 
         # When camera is lower than what we've generated, generate more tiles
-        targetTileHeight = ceil((yPos + yHeight) / TILE_SIZE)
+        targetTileHeight = ceil((yPos + yHeight) / TILE_SIZE) + 1
         if (targetTileHeight > len(self.tiles)):
             for x in range(targetTileHeight - len(self.tiles)):
                 self.generateRow()
