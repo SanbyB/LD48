@@ -26,6 +26,6 @@ class Player:
 
 
     def render(self, screen):
-        screen.blit(pygame.image.load(r'LD48\Graphics\Player.png'), (self.x, self.y))
+        screen.blit(pygame.image.load(r'Graphics\Player.png'), (self.x, self.y))
                 
 
