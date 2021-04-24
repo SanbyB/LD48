@@ -1,3 +1,5 @@
+from resources import IMAGE_ENTITY
+from physics import Physics
 
 class Entity:
     def __init__(self, world):
