@@ -1,7 +1,6 @@
 ### Todo
 
 * Sound effects and background music
-* Render score on top of screen
 * Cave generation
 * Enemy drops things that are useful
 * Inventory equipment

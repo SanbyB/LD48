@@ -8,12 +8,13 @@ from config import SCREEN_WIDTH, SCREEN_HEIGHT
 from inventory import Inventory
 from resources import FONT
 from ui import UI
+from maps.tilemap import TILE_MAP_WIDTH, TILE_SIZE
 
 
 cam = Camera()
 world = World(cam)
 ui = UI(world)
-world.addEntity(Entity(4000, -100, 50, 50, world, 20))
+world.addEntity(Entity((TILE_MAP_WIDTH / 2) * TILE_SIZE + 200, -100, 50, 50, world, 20))
 player = Player(world)
 world.player = player
 inventory = Inventory()
@@ -32,7 +33,6 @@ while True: # main game loop
     player.update()
     cam.move(player)
     inventory.update()
-    player.render(DISPLAYSURF, cam)
     world.update(cam)
     world.render(DISPLAYSURF, cam)
     ui.draw(DISPLAYSURF)

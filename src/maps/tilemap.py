@@ -4,8 +4,9 @@ from maps.tile import Rock, Air, Ore
 from math import ceil, floor
 from config import SCREEN_WIDTH, SCREEN_HEIGHT
 import random
+import pygame
 
-TILE_MAP_WIDTH = 100
+TILE_MAP_WIDTH = 20
 TILE_SIZE = 80
 
 class TileMap:
