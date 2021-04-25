@@ -63,6 +63,7 @@ class Physics:
     def applyVelocity(self):
         self.x += self.x_vel
         self.y += self.y_vel
+        # The x_vel friction is only in the player class as the entity doesn't move enough to have friction
         self.y_vel = self.y_vel * 0.97
 
 
@@ -72,6 +73,7 @@ class Physics:
         return
 
     def onHitFloor(self):
+        print('floor')
         return
 
     def onHitRoof(self):

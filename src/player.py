@@ -34,6 +34,7 @@ class Player(Physics):
         super().update()
         self.move()
         self.attack()
+        self.fall_damage()
 
     def move(self):
         keys = pygame.key.get_pressed()
@@ -121,6 +122,11 @@ class Player(Physics):
         self.x_vel += HIT_AMOUNT if diffX > 0 else -HIT_AMOUNT
         self.hitCount = 10
         PLAYER_HURT.reset()
+
+
+    def fall_damage(self):
+        if self.y_vel > 7.5:
+            self.hp -= 1
 
 
     def attack(self):
