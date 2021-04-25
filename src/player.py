@@ -4,7 +4,7 @@ from resources import PLAYER_BREATHING, PLAYER_WALKING, PLAYER_JUMPING, PLAYER_F
 from physics import Physics
 from maps.tilemap import TILE_MAP_WIDTH, TILE_SIZE
 from config import SCREEN_WIDTH, SCREEN_HEIGHT
-
+from equipment import Equipment
 
 WALK_ACCN = 1.5
 WALK_SPEED = 5
@@ -29,11 +29,13 @@ class Player(Physics):
         self.atk_range = 30000
         self.isFlipped = False
         self.hitCount = 0
+        self.equipment = Equipment(world, self)
 
     def update(self):
         super().update()
         self.move()
         self.attack()
+        self.equipment.update()
 
     def move(self):
         keys = pygame.key.get_pressed()
@@ -106,6 +108,7 @@ class Player(Physics):
             PLAYER_BREATHING.draw(screen, xPos, yPos, width, self.height, self.isFlipped)
 
         self.health_bar(screen)
+        self.equipment.render(screen, camera)
 
       
                 
@@ -139,6 +142,7 @@ class Player(Physics):
             targetX = (distance * np.cos(theta)) + self.x + self.width / 2
             targetY = -distance * np.sin(theta) + self.y + self.height / 2
             self.world.tileMap.damageTile(targetX, targetY, 0.1)
+            self.equipment.onAttack()
 
             if self.atk_counter == 0:
                 self.theta = theta
