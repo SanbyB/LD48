@@ -129,6 +129,7 @@ class Player(Physics):
         self.hp -= amount
         self.hitCount = 10
         PLAYER_HURT.reset()
+        self.world.camera.shake(10)
 
 
     def fall_damage(self):

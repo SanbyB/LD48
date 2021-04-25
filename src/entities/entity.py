@@ -5,6 +5,7 @@ import numpy as np
 from config import SCREEN_WIDTH, SCREEN_HEIGHT
 import random
 from animation import Animation
+from particle import Particle
 
 
 class Entity(Physics):
@@ -27,8 +28,10 @@ class Entity(Physics):
         self.hitCount = 0
 
     
-    def update(self, camera, theta, strength):
+    def update(self, camera):
         super().update()
+        theta = self.world.player.theta
+        strength = self.world.player.atk_strength
         self.ray(camera)
         self.attacked(theta, strength, camera)
         self.attack(camera)
@@ -130,6 +133,10 @@ class Entity(Physics):
         diffX = self.x -  self.world.player.x
         HIT_AMOUNT = 20
         self.x_vel += HIT_AMOUNT if diffX > 0 else -HIT_AMOUNT
+        for i in range(0, 10):
+            particle = Particle(self.world, self.x + self.width / 2, self.y + self.height / 2, (99, 199, 77))
+            self.world.addEntity(particle)
+        self.world.camera.shake(5)
 
     def attack(self, camera):
         if self.world.player != None:
@@ -170,5 +177,8 @@ class Entity(Physics):
     def death(self):
         if self.hp <= 0:
             self.world.removeEntity(self)
+            for i in range(0, 20):
+                particle = Particle(self.world, self.x + self.width / 2, self.y + self.height / 2, (99, 199, 77))
+                self.world.addEntity(particle)
 
 
