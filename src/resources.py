@@ -12,6 +12,8 @@ PLAYER_JUMPING = Animation(PLAYER_SHEET, 2, 0.2)
 PLAYER_FALLING = Animation(PLAYER_SHEET, 3, 0.2)
 PLAYER_HURT = Animation(PLAYER_SHEET, 4, 0.2)
 
+SLIME_SHEET = SpriteSheet(pygame.image.load(os.path.join("Graphics", "slime.png")), 8, 4)
+
 IMAGE_ENTITY = pygame.image.load(os.path.join("Graphics", "Entity.png"))
 
 TILE_BREAKING = SpriteSheet(pygame.image.load(os.path.join("Graphics", "breaking.png")), 5, 1)

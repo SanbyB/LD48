@@ -1,9 +1,11 @@
-from resources import IMAGE_ENTITY
+from resources import SLIME_SHEET
 from physics import Physics
 import pygame
 import numpy as np
 from config import SCREEN_WIDTH, SCREEN_HEIGHT
 import random
+from animation import Animation
+
 
 class Entity(Physics):
     def __init__(self, x, y, width, height, world, hp):
@@ -17,6 +19,12 @@ class Entity(Physics):
         self.atk_speed = 50
         self.atk_strength = 2
         self.atk_range = 20000
+        self.slime_breathing = Animation(SLIME_SHEET, 0, 0.1)
+        self.slime_walking = Animation(SLIME_SHEET, 1, 0.2)
+        self.slime_jumping = Animation(SLIME_SHEET, 3, 0.2)
+        self.slime_hurt = Animation(SLIME_SHEET, 2, 0.2)  
+        self.isFlipped = False     
+        self.hitCount = 0
 
     
     def update(self, camera, theta, strength):
@@ -41,9 +49,30 @@ class Entity(Physics):
     def render(self, screen, camera):
         xPos = self.x - camera.x
         yPos = self.y - camera.y
-        scaledImage = pygame.transform.scale(IMAGE_ENTITY, (self.width, self.height)) 
-        screen.blit(scaledImage, (xPos, yPos))
         self.health_bar(screen, camera)
+        isJumping = abs(self.y_vel) > 0.05
+        isWalking = abs(self.x_vel) > 0.05 and not (isJumping)
+
+        if self.x_vel < 0:
+            self.isFlipped = True
+
+        if self.x_vel > 0:
+            self.isFlipped = False
+
+        if self.hitCount > 0:
+            self.hitCount -= 1
+            self.slime_hurt.update()
+            self.slime_hurt.draw(screen, xPos, yPos, self.width, self.height, self.isFlipped)
+        elif isWalking:
+            self.slime_walking.update()
+            self.slime_walking.draw(screen, xPos, yPos,  self.width, self.height, self.isFlipped)
+        elif isJumping:
+            self.slime_jumping.update()
+            self.slime_jumping.draw(screen, xPos, yPos, self.width, self.height, self.isFlipped)
+        else: 
+            self.slime_breathing.update()
+            self.slime_breathing.draw(screen, xPos, yPos, self.width, self.height, self.isFlipped)
+
 
     def ray(self, camera):
         # Targeting the entity
@@ -88,11 +117,19 @@ class Entity(Physics):
             if theta != None:  
                 if self.theta0 > self.theta1:
                     if theta > self.theta0 or theta < self.theta1:
-                        self.hp -= strength
+                        self.onHit(strength)
                 elif self.theta0 < theta < self.theta1:
-                    self.hp -= strength
+                    self.onHit(strength)
 
 
+
+    def onHit(self, amount):
+        self.hp -= amount
+        self.hitCount = 10
+        self.slime_hurt.reset()
+        diffX = self.x -  self.world.player.x
+        HIT_AMOUNT = 20
+        self.x_vel += HIT_AMOUNT if diffX > 0 else -HIT_AMOUNT
 
     def attack(self, camera):
         if self.world.player != None:
