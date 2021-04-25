@@ -43,7 +43,7 @@ class Entity(Physics):
                 if self.hp < 5:
                     colour = (240, 0 , 0)
 
-            pygame.draw.rect(screen, colour, (self.x - camera.x, self.y - camera.y - (self.height * 0.6), self.hp*2, 5))
+            pygame.draw.rect(screen, colour, (self.x - camera.x + self.width/2 - 20, self.y - camera.y - (self.height * 0.1), self.hp*2, 5))
 
 
     def render(self, screen, camera):
