@@ -12,10 +12,10 @@ class Entity(Physics):
         self.theta0, self.theta1 = None, None
 
     
-    def update(self, camera, theta):
+    def update(self, camera, theta, strength):
         super().update()
         self.ray(camera)
-        self.attacked(theta)
+        self.attacked(theta, strength)
         self.death()
 
 
@@ -59,14 +59,14 @@ class Entity(Physics):
         self.theta1 = np.angle(-x1 - y1 * 1j) + np.pi
 
     
-    def attacked(self, theta):
+    def attacked(self, theta, strength):
 
         if theta != None:  
             if self.theta0 > self.theta1:
                 if theta > self.theta0 or theta < self.theta1:
-                    self.hp -= 3
+                    self.hp -= strength
             elif self.theta0 < theta < self.theta1:
-                self.hp -= 3
+                self.hp -= strength
     
 
     def death(self):
