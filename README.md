@@ -2,8 +2,6 @@
 
 * Sound effects and background music
 * Enemy drops things that are useful
-* Inventory equipment
-* E opens inventory to upgrade equipment and takes iron away from total score
 * Cave generation
 
 ### Idea

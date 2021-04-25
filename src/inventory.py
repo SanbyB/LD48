@@ -54,7 +54,7 @@ class Inventory:
             if self.player.score >= self.speed_cost:
                 self.player.score -= self.speed_cost
                 self.speed_cost += 2
-                self.player.atk_speed -= 2
+                self.player.atk_speed -= 3
         else:
             self.speed_max = True
 
@@ -62,7 +62,7 @@ class Inventory:
         if self.player.atk_range < 50000:
             if self.player.score >= self.range_cost:
                 self.player.score -= self.range_cost
-                self.range_cost += 3
+                self.range_cost += 2
                 self.player.atk_range += 3000
         else:
             self.range_max = True
