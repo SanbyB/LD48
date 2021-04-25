@@ -120,10 +120,13 @@ class Player(Physics):
 
 
     def onHitByEntity(self, amount, x, y):
-        self.hp -= amount
         diffX = self.x - x
         HIT_AMOUNT = 40
         self.x_vel += HIT_AMOUNT if diffX > 0 else -HIT_AMOUNT
+        self.onHurt(amount)
+
+    def onHurt(self, amount):
+        self.hp -= amount
         self.hitCount = 10
         PLAYER_HURT.reset()
 
@@ -132,7 +135,7 @@ class Player(Physics):
         if self.y_vel > 7.5:
             self.too_fast = True
         if self.too_fast and self.floor:
-            self.hp -= 1
+            self.onHurt(1)
             self.too_fast = False
 
 
