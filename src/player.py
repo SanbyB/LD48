@@ -11,13 +11,14 @@ WALK_SPEED = 5
 JUMP_POWER = 12
 
 class Player(Physics):
-    def __init__(self, world):
+    def __init__(self, world, onPlayerDead):
         super().__init__(
             (TILE_MAP_WIDTH / 2) * TILE_SIZE,
             -100,
             40,
             64
         )
+        self.onPlayerDead = onPlayerDead
         self.invtry = []
         self.world = world
         self.didJump = False
@@ -44,6 +45,13 @@ class Player(Physics):
         self.attack()
         self.fall_damage()
         self.equipment.update()
+        PLAYER_HURT.update()
+        PLAYER_WALKING.update()
+        PLAYER_FALLING.update()
+        PLAYER_JUMPING.update()
+        PLAYER_BREATHING.update()
+
+
 
     def move(self):
         keys = pygame.key.get_pressed()
@@ -100,19 +108,14 @@ class Player(Physics):
 
         if self.hitCount > 0:
             self.hitCount -= 1
-            PLAYER_HURT.update()
             PLAYER_HURT.draw(screen, xPos, yPos, width, self.height, self.isFlipped)
         elif isWalking:
-            PLAYER_WALKING.update()
             PLAYER_WALKING.draw(screen, xPos, yPos, width, self.height, self.isFlipped)
         elif isFalling:
-            PLAYER_FALLING.update()
             PLAYER_FALLING.draw(screen, xPos, yPos, width, self.height, self.isFlipped)
         elif isJumping:
-            PLAYER_JUMPING.update()
             PLAYER_JUMPING.draw(screen, xPos, yPos, width, self.height, self.isFlipped)
         else: 
-            PLAYER_BREATHING.update()
             PLAYER_BREATHING.draw(screen, xPos, yPos, width, self.height, self.isFlipped)
 
         self.health_bar(screen)
@@ -136,6 +139,8 @@ class Player(Physics):
         self.hitCount = 10
         PLAYER_HURT.reset()
         self.world.camera.shake(10)
+        if (self.hp < 0):
+            self.onPlayerDead()
 
 
     def fall_damage(self):

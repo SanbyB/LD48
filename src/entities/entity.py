@@ -37,6 +37,12 @@ class Entity(Physics):
         self.attack(camera)
         self.move()
         self.death()
+        self.slime_hurt.update()
+        self.slime_walking.update()
+        self.slime_jumping.update()
+        self.slime_breathing.update()
+
+
 
     def health_bar(self, screen, camera):
         if self.hp > 0:
@@ -64,16 +70,12 @@ class Entity(Physics):
 
         if self.hitCount > 0:
             self.hitCount -= 1
-            self.slime_hurt.update()
             self.slime_hurt.draw(screen, xPos, yPos, self.width, self.height, self.isFlipped)
         elif isWalking:
-            self.slime_walking.update()
             self.slime_walking.draw(screen, xPos, yPos,  self.width, self.height, self.isFlipped)
         elif isJumping:
-            self.slime_jumping.update()
             self.slime_jumping.draw(screen, xPos, yPos, self.width, self.height, self.isFlipped)
         else: 
-            self.slime_breathing.update()
             self.slime_breathing.draw(screen, xPos, yPos, self.width, self.height, self.isFlipped)
 
 
