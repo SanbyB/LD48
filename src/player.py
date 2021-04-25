@@ -68,6 +68,7 @@ class Player(Physics):
         mouse = pygame.mouse.get_pressed()
         
         self.theta = None
+        distance = TILE_SIZE * 0.9
 
         if mouse[0] == 1:
             mp = pygame.mouse.get_pos()
@@ -75,6 +76,14 @@ class Player(Physics):
             y_dist = mp[1] - SCREEN_HEIGHT/2
 
             self.theta = np.angle(x_dist + y_dist * 1j) + np.pi
+
+            targetX = (distance * np.cos(self.theta)) + self.x + self.width / 2
+            targetY = -distance * np.sin(self.theta) + self.y + self.height / 2
+            self.world.tileMap.damageTile(targetX, targetY, 0.1)
+
+
+
+
         
 
 
