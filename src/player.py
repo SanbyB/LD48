@@ -22,11 +22,12 @@ class Player(Physics):
         self.world = world
         self.didJump = False
         self.hp = 20
+        self.theta = None
 
-    def update(self, camera):
+    def update(self):
         super().update()
         self.move()
-        self.attack(camera)
+        self.attack()
 
     def move(self):
         keys = pygame.key.get_pressed()
@@ -63,17 +64,17 @@ class Player(Physics):
         #self.world.tileMap.damageTile(self.x, self.y + self.height + 20, 0.1)
 
 
-    def attack(self, camera):
+    def attack(self):
         mouse = pygame.mouse.get_pressed()
-
-        theta = -100
+        
+        self.theta = None
 
         if mouse[0] == 1:
             mp = pygame.mouse.get_pos()
             x_dist = SCREEN_WIDTH/2 - mp[0]
             y_dist = mp[1] - SCREEN_HEIGHT/2
 
-            theta = np.angle(x_dist + y_dist * 1j) + np.pi
+            self.theta = np.angle(x_dist + y_dist * 1j) + np.pi
+        
 
-        return theta
 
