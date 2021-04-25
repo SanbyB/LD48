@@ -3,6 +3,7 @@
 from maps.tile import Rock, Air, Ore
 from math import ceil, floor
 from config import SCREEN_WIDTH, SCREEN_HEIGHT
+from entities.entity import Entity
 import random
 import pygame
 
@@ -14,7 +15,7 @@ class TileMap:
         self.world = world
         self.tiles = []
         self.onGenerateListener = onGenerateListener
-        self.generateRow()
+        self.generateChunk()
         return
 
     def render(self, surface, camera):
@@ -27,7 +28,7 @@ class TileMap:
         targetTileHeight = ceil((yPos + yHeight) / TILE_SIZE) + 10
         if (targetTileHeight > len(self.tiles)):
             for x in range(targetTileHeight - len(self.tiles)):
-                self.generateRow()
+                self.generateChunk()
 
         xTilePos = floor(xPos / TILE_SIZE)
         yTilePos = floor(yPos / TILE_SIZE)
@@ -50,6 +51,17 @@ class TileMap:
         
         return
     
+    def generateChunk(self):
+        for i in range(0, 5):
+            self.generateRow()
+
+        y = len(self.tiles)
+        bottomRock = []
+        for x in range(TILE_MAP_WIDTH):
+            bottomRock.append(Rock(self.world, x, y))
+        self.tiles.append(bottomRock)
+        self.onGenerateListener(y)
+
     def generateRow(self):
         y = len(self.tiles)
         newRow = []
@@ -66,6 +78,10 @@ class TileMap:
             tile = Rock(self.world, x, y)
         else:
             tile = Air(self.world, x, y)
+            if value < 0.05:
+                xPos = x * TILE_SIZE + TILE_SIZE / 2 - 25
+                yPos = y * TILE_SIZE + TILE_SIZE / 2 - 25
+                self.world.addEntity(Entity(xPos, yPos, 50, 50, self.world, 20))
         
         return tile
 
