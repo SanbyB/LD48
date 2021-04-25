@@ -1,18 +1,14 @@
 ### Todo
 
 * Some sort of equipment / weapon which renders next to the player
-* Enemy entity which player can hit
 * Add unique tile for an iron ore for points 
-* Enemy needs to be able to attack the player
-* Player and enemy both need a hitbox
+* Health bars
+* Cave generation
 * Enemy drops things that are useful
 * Player can take fall damage
 * Inventory equipment
 * E opens inventory to upgrade equipment and takes iron away from total score
 * (Polish) We need a screen for when we die
-* Enemy animation
-* Player and enemy white box when hit
-* Draw score text 
 
 ### Idea
 
