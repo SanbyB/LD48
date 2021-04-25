@@ -63,7 +63,6 @@ class Physics:
     def applyVelocity(self):
         self.x += self.x_vel
         self.y += self.y_vel
-        self.x_vel = self.x_vel * 0.8
         self.y_vel = self.y_vel * 0.97
 
 

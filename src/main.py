@@ -7,7 +7,7 @@ from entities.entity import Entity
 from config import SCREEN_WIDTH, SCREEN_HEIGHT
 
 world = World()
-world.addEntity(Entity(4000, 0, 50, 50, world, 20))
+world.addEntity(Entity(4000, -100, 50, 50, world, 20))
 player = Player(world)
 world.player = player
 cam = Camera()

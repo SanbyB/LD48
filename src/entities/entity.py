@@ -3,6 +3,7 @@ from physics import Physics
 import pygame
 import numpy as np
 from config import SCREEN_WIDTH, SCREEN_HEIGHT
+import random
 
 class Entity(Physics):
     def __init__(self, x, y, width, height, world, hp):
@@ -10,12 +11,15 @@ class Entity(Physics):
         self.world = world
         self.hp = hp
         self.theta0, self.theta1 = None, None
+        self.x_counter = 0
+        self.y_counter = 0
 
     
     def update(self, camera, theta, strength):
         super().update()
         self.ray(camera)
         self.attacked(theta, strength)
+        self.move()
         self.death()
 
 
@@ -67,6 +71,26 @@ class Entity(Physics):
                     self.hp -= strength
             elif self.theta0 < theta < self.theta1:
                 self.hp -= strength
+
+    
+    def move(self):
+        self.x_counter += 1
+        self.y_counter += 1
+        change_x_vel = 10000
+        change_y_vel = 5000
+        if self.x_counter == 300:
+            self.x_counter = 0
+        if self.y_counter == 150:
+            self.y_counter = 0
+        if self.x_counter > 100:
+            change_x_vel = random.randint(100, 10000)
+        if self.y_counter > 50:
+            change_y_vel = random.randint(50, 5000)
+        if self.x_counter > change_x_vel:
+            self.x_vel = random.randint(-4, 4)
+            self.x_counter = 0
+        if self.y_counter > change_y_vel:
+            self.y_vel = -10
     
 
     def death(self):

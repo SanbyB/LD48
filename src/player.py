@@ -53,6 +53,8 @@ class Player(Physics):
             self.didJump = True
             self.y_vel = -JUMP_POWER
 
+        self.x_vel = self.x_vel * 0.8
+
 
     def render(self, screen, camera):
         imageInflate = 12
