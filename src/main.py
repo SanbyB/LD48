@@ -28,22 +28,38 @@ class Game:
         self.inventory.player = self.player
 
     def update(self):
+
+        keys = pygame.key.get_pressed()
+        if not self.hasStarted:
+            if keys[pygame.K_RETURN]:
+                self.hasStarted = True
+
         if self.hasDied:
+            if keys[pygame.K_RETURN]:
+                self.reset()
+                self.hasDied = False
+
+        if self.hasDied or not self.hasStarted:
             return
         self.player.update()
         self.cam.move(game.player)
         self.inventory.update()
         self.world.update(game.cam)
-    
+        
+
+
     def render(self, DISPLAYSURF):
         self.world.render(DISPLAYSURF, game.cam)
-        self.ui.draw(DISPLAYSURF)
+        if not self.hasStarted:
+            self.ui.renderStartingScreen(DISPLAYSURF)
+        elif self.hasDied:
+            self.ui.renderDiedScreen(DISPLAYSURF, self.highScore)
+        else:
+            self.ui.draw(DISPLAYSURF)
 
     def onPlayerDead(self):
-        # self.hasDied = True
+        self.hasDied = True
         self.highScore = max(self.player.score, self.highScore)
-        self.reset()
-        print("High score: ", self.highScore)
 
 
 game = Game()
