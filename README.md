@@ -1,7 +1,6 @@
 ### Todo
 
 * Sound effects and background music
-* Cave generation
 * Enemy drops things that are useful
 * Inventory equipment
 * E opens inventory to upgrade equipment and takes iron away from total score

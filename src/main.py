@@ -14,7 +14,6 @@ from maps.tilemap import TILE_MAP_WIDTH, TILE_SIZE
 cam = Camera()
 world = World(cam)
 ui = UI(world)
-world.addEntity(Entity((TILE_MAP_WIDTH / 2) * TILE_SIZE + 200, -100, 50, 50, world, 20))
 player = Player(world)
 world.player = player
 inventory = Inventory()
