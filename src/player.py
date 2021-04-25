@@ -24,7 +24,7 @@ class Player(Physics):
         self.hp = 20
         self.theta = None  # angle of attack
         self.atk_counter = 0
-        self.atk_speed = 50
+        self.atk_speed = 25
         self.atk_strength = 3
         self.atk_range = 30000
         self.isFlipped = False
@@ -151,11 +151,11 @@ class Player(Physics):
 
             targetX = (distance * np.cos(theta)) + self.x + self.width / 2
             targetY = -distance * np.sin(theta) + self.y + self.height / 2
-            self.world.tileMap.damageTile(targetX, targetY, 0.1)
-            self.equipment.onAttack()
 
             if self.atk_counter == 0:
                 self.theta = theta
+                self.world.tileMap.damageTile(targetX, targetY, 0.2)
+                self.equipment.onAttack()
 
             self.atk_counter += 1
 
