@@ -3,6 +3,7 @@ from pygame import Rect
 from resources import TILE_ROCK, TILE_BREAKING
 import random
 from math import ceil, floor
+from particle import Particle
 
 def getCode(tiles, x, y):
     top = "_"
@@ -57,6 +58,11 @@ class Rock(Tile):
         if (self.health < 0):
             self.health = 0
             self.world.tileMap.replaceTile(self.tileX, self.tileY, Air(self.world, self.tileX, self.tileX))
+            for i in range(0, 10):
+                posX = random.uniform(self.tileX * 80, (self.tileX + 1) * 80)
+                posY = random.uniform(self.tileY * 80, (self.tileY + 1) * 80)
+                particle = Particle(self.world, posX, posY, (115, 62, 57))
+                self.world.addEntity(particle)
         return
 
 class Air(Tile):

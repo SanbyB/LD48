@@ -17,7 +17,7 @@ class World:
         self.toAdd.clear();
         self.toRemove.clear();
         for entity in self.entities:
-            entity.update(camera, self.player.theta, self.player.atk_strength)
+            entity.update(camera)
 
 
     def render(self, surface, camera):   
