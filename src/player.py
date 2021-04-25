@@ -34,6 +34,10 @@ class Player(Physics):
         self.score = 0
 
 
+    def onOrePickup(self):
+        self.score += 1
+        print(self.score)
+
     def update(self):
         super().update()
         self.move()
