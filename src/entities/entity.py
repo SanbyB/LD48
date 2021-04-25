@@ -22,7 +22,7 @@ class Entity(Physics):
     def update(self, camera, theta, strength):
         super().update()
         self.ray(camera)
-        self.attacked(theta, strength)
+        self.attacked(theta, strength, camera)
         self.attack(camera)
         self.move()
         self.death()
@@ -68,14 +68,20 @@ class Entity(Physics):
         self.theta1 = np.angle(-x1 - y1 * 1j) + np.pi
 
     
-    def attacked(self, theta, strength):
+    def attacked(self, theta, strength, camera):
+        xPos = self.x - camera.x - SCREEN_WIDTH/2 + self.width/2
+        yPos = self.y - camera.y - SCREEN_HEIGHT/2 + self.height/2
 
-        if theta != None:  
-            if self.theta0 > self.theta1:
-                if theta > self.theta0 or theta < self.theta1:
+        if xPos**2 + yPos**2 < self.world.player.atk_range:
+
+            if theta != None:  
+                if self.theta0 > self.theta1:
+                    if theta > self.theta0 or theta < self.theta1:
+                        self.hp -= strength
+                elif self.theta0 < theta < self.theta1:
                     self.hp -= strength
-            elif self.theta0 < theta < self.theta1:
-                self.hp -= strength
+
+
 
     def attack(self, camera):
         if self.world.player != None:

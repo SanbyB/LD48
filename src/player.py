@@ -26,7 +26,7 @@ class Player(Physics):
         self.atk_counter = 0
         self.atk_speed = 50
         self.atk_strength = 3
-        self.damage_counter = 0
+        self.atk_range = 30000
         
 
     def update(self):
