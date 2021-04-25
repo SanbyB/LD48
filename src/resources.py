@@ -1,8 +1,13 @@
 import os.path
 import pygame
 from spritesheet import SpriteSheet
+from animation import Animation
 
 IMAGE_PLAYER = pygame.image.load(os.path.join("Graphics", "Player.png"))
+
+PLAYER_SHEET = SpriteSheet(pygame.image.load(os.path.join("Graphics", "miner.png")), 8, 2)
+PLAYER_BREATHING = Animation(PLAYER_SHEET, 0, 0.1)
+PLAYER_WALKING = Animation(PLAYER_SHEET, 1, 0.2)
 
 IMAGE_ENTITY = pygame.image.load(os.path.join("Graphics", "Entity.png"))
 

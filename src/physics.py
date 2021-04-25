@@ -37,16 +37,17 @@ class Physics:
             self.onHitEdge()
         
         
+        BOTTOM_FRIC = 0.5
         # Does bottom collide
         if self.y_vel > 0 and self.world.tileMap.doesCollide(self.x, self.y + self.height + self.y_vel):
             if self.y_vel < 2.5:
                 self.y_vel = 0
-            self.y_vel = -self.y_vel * 0.8
+            self.y_vel = -self.y_vel * BOTTOM_FRIC
             self.onHitFloor()
         if self.y_vel > 0 and self.world.tileMap.doesCollide(self.x + self.width, self.y + self.height + self.y_vel):
             if self.y_vel < 2.5:
                 self.y_vel = 0
-            self.y_vel = -self.y_vel * 0.8
+            self.y_vel = -self.y_vel * BOTTOM_FRIC
             self.onHitFloor()
 
         # Does top collide
@@ -62,7 +63,7 @@ class Physics:
     def applyVelocity(self):
         self.x += self.x_vel
         self.y += self.y_vel
-        self.x_vel = self.x_vel * 0.93
+        self.x_vel = self.x_vel * 0.8
         self.y_vel = self.y_vel * 0.97
 
 
