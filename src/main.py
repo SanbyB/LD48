@@ -19,7 +19,7 @@ pygame.display.set_caption('Hello World!')
 clock = pygame.time.Clock()
 
 while True: # main game loop
-    dt = clock.tick(10)
+    dt = clock.tick(60)
     # Clear the screen
     pygame.draw.rect(DISPLAYSURF, (0, 0, 0, 255), Rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT))
     player.update()

@@ -7,6 +7,7 @@ class Physics:
         self.x_vel = 0
         self.y_vel = 0
         self.grav = 0.3
+        self.floor = False
 
     def update(self):
         self.gravity()
@@ -19,6 +20,7 @@ class Physics:
 
 
     def resolveCollisions(self):
+        self.floor = False
         
         # Does right side collide
         if self.x_vel > 0 and self.world.tileMap.doesCollide(self.x + self.x_vel + self.width, self.y):
@@ -73,7 +75,7 @@ class Physics:
         return
 
     def onHitFloor(self):
-        print('floor')
+        self.floor = True
         return
 
     def onHitRoof(self):
