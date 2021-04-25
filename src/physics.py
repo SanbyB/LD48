@@ -37,7 +37,7 @@ class Physics:
             self.onHitEdge()
         
         
-        BOTTOM_FRIC = 0.5
+        BOTTOM_FRIC = 0.2
         # Does bottom collide
         if self.y_vel > 0 and self.world.tileMap.doesCollide(self.x, self.y + self.height + self.y_vel):
             if self.y_vel < 2.5:
