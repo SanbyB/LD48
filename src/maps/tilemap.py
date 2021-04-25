@@ -11,10 +11,9 @@ TILE_MAP_WIDTH = 20
 TILE_SIZE = 80
 
 class TileMap:
-    def __init__(self, world, onGenerateListener):
+    def __init__(self, world):
         self.world = world
         self.tiles = []
-        self.onGenerateListener = onGenerateListener
         self.generateChunk()
         return
 
@@ -60,7 +59,6 @@ class TileMap:
         for x in range(TILE_MAP_WIDTH):
             bottomRock.append(Rock(self.world, x, y))
         self.tiles.append(bottomRock)
-        self.onGenerateListener(y)
 
     def generateRow(self):
         y = len(self.tiles)
@@ -68,7 +66,6 @@ class TileMap:
         for x in range(TILE_MAP_WIDTH):
             newRow.append(self.generateTile(x, y))
         self.tiles.append(newRow)
-        self.onGenerateListener(y)
 
     def generateTile(self, x, y):
         value = random.uniform(0, 1)

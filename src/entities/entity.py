@@ -179,6 +179,7 @@ class Entity(Physics):
     def death(self):
         if self.hp <= 0:
             self.world.removeEntity(self)
+            self.world.player.score += 1
             for i in range(0, 20):
                 particle = Particle(self.world, self.x + self.width / 2, self.y + self.height / 2, (99, 199, 77))
                 self.world.addEntity(particle)

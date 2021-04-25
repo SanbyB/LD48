@@ -10,7 +10,7 @@ class World:
         self.entities = []
         self.toAdd = []
         self.toRemove = []
-        self.tileMap = TileMap(self, self.onGenerateListener)
+        self.tileMap = TileMap(self)
 
 
     def update(self, camera):  
@@ -50,11 +50,5 @@ class World:
         self.toRemove.append(entity)
 
 
-    # This is called when the camera causes the map to increase in size
-    # We should generate enemies and things in this function
-    # Index, measured in tile count of how deep the world is 
-    def onGenerateListener(self, index):
-        #print("Generated world", index, "deep")
-        return
 
 

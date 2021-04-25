@@ -11,6 +11,7 @@ IMAGE_PLAYER = pygame.image.load(os.path.join("Graphics", "Player.png"))
 FONT = 0
 FONT = pygame.font.Font(os.path.join("Graphics", "ARCADECLASSIC.TTF"), 72)
 SMALLER_FONT = pygame.font.Font(os.path.join("Graphics", "ARCADECLASSIC.TTF"), 36)
+EVEN_SMALLER_FONT = pygame.font.Font(os.path.join("Graphics", "ARCADECLASSIC.TTF"), 28)
 
 
 ORE_SHEET = SpriteSheet(pygame.image.load(os.path.join("Graphics", "ore.png")), 1, 1)
