@@ -1,8 +1,9 @@
 from maps.tilemap import TileMap
 
 class World:
-    def __init__(self):
-        self.player = None 
+    def __init__(self, camera):
+        self.player = None
+        self.camera = camera 
         self.entities = []
         self.toAdd = []
         self.toRemove = []

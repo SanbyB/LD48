@@ -55,6 +55,7 @@ class Rock(Tile):
 
     def onDamage(self, amount):
         self.health -= amount
+        self.world.camera.shake(4)
         if (self.health < 0):
             self.health = 0
             self.world.tileMap.replaceTile(self.tileX, self.tileY, Air(self.world, self.tileX, self.tileX))

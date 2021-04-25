@@ -136,6 +136,7 @@ class Entity(Physics):
         for i in range(0, 10):
             particle = Particle(self.world, self.x + self.width / 2, self.y + self.height / 2, (99, 199, 77))
             self.world.addEntity(particle)
+        self.world.camera.shake(5)
 
     def attack(self, camera):
         if self.world.player != None:

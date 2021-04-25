@@ -6,11 +6,11 @@ from camera import Camera
 from entities.entity import Entity
 from config import SCREEN_WIDTH, SCREEN_HEIGHT
 
-world = World()
+cam = Camera()
+world = World(cam)
 world.addEntity(Entity(4000, -100, 50, 50, world, 20))
 player = Player(world)
 world.player = player
-cam = Camera()
 
 pygame.init()
 DISPLAYSURF = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
