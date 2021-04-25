@@ -1,6 +1,5 @@
 ### Todo
 
-* Add unique tile for an iron ore for points 
 * Sound effects and background music
 * Render score on top of screen
 * Cave generation
