@@ -26,6 +26,7 @@ class Player(Physics):
         self.atk_counter = 0
         self.atk_speed = 50
         self.atk_strength = 3
+        self.damage_counter = 0
         
 
     def update(self):
@@ -104,6 +105,10 @@ class Player(Physics):
 
         if self.atk_counter == self.atk_speed:
             self.atk_counter = 0
+
+    
+                
+                
 
         
 

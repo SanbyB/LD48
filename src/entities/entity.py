@@ -13,12 +13,17 @@ class Entity(Physics):
         self.theta0, self.theta1 = None, None
         self.x_counter = 0
         self.y_counter = 0
+        self.atk_counter = 0
+        self.atk_speed = 50
+        self.atk_strength = 2
+        self.atk_range = 20000
 
     
     def update(self, camera, theta, strength):
         super().update()
         self.ray(camera)
         self.attacked(theta, strength)
+        self.attack(camera)
         self.move()
         self.death()
 
@@ -72,6 +77,19 @@ class Entity(Physics):
             elif self.theta0 < theta < self.theta1:
                 self.hp -= strength
 
+    def attack(self, camera):
+        if self.world.player != None:
+            xPos = self.x - camera.x - SCREEN_WIDTH/2 + self.width/2
+            yPos = self.y - camera.y - SCREEN_HEIGHT/2 + self.height/2
+            
+            if xPos**2 + yPos**2 < self.atk_range:
+                if self.atk_counter == 0:
+                    self.world.player.hp -= self.atk_strength
+                self.atk_counter += 1
+                if self.atk_counter == self.atk_speed:
+                    self.atk_counter = 0 
+
+
     
     def move(self):
         self.x_counter += 1
@@ -84,13 +102,15 @@ class Entity(Physics):
             self.y_counter = 0
         if self.x_counter > 100:
             change_x_vel = random.randint(100, 10000)
-        if self.y_counter > 50:
-            change_y_vel = random.randint(50, 5000)
+        if self.y_counter > 100:
+            change_y_vel = random.randint(100, 5000)
         if self.x_counter > change_x_vel:
-            self.x_vel = random.randint(-4, 4)
+            self.x_vel = random.randrange(-4, 4)
             self.x_counter = 0
         if self.y_counter > change_y_vel:
             self.y_vel = -10
+
+        self.x_vel = self.x_vel * 0.99
     
 
     def death(self):
