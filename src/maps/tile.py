@@ -1,6 +1,6 @@
 import pygame
 from pygame import Rect
-from resources import TILE_ROCK, TILE_BREAKING
+from resources import TILE_ROCK, TILE_BREAKING, ORE_SHEET
 import random
 from math import ceil, floor
 from particle import Particle
@@ -42,12 +42,8 @@ class Rock(Tile):
         self.health = random.uniform(0, 1.0)
     
     def render(self, surface, x, y, size, tiles):
-
         image = TILE_ROCK[getCode(tiles, self.tileX, self.tileY)]
-
         scaledImage = pygame.transform.scale(image, (size, size)) 
-
-
         surface.blit(scaledImage, (x, y))
         tileHealth = 5 - ceil(self.health * 5)
         TILE_BREAKING.draw(surface, tileHealth, 0, x, y, size, size, False)
@@ -65,6 +61,40 @@ class Rock(Tile):
                 particle = Particle(self.world, posX, posY, (115, 62, 57))
                 self.world.addEntity(particle)
         return
+
+class Ore(Tile):
+    def __init__(self, world, tileX, tileY):
+        super().__init__(world, "ORE", tileX, tileY, True)
+        self.health = random.uniform(0, 1.0)
+    
+    def render(self, surface, x, y, size, tiles):
+        image = TILE_ROCK[getCode(tiles, self.tileX, self.tileY)]
+        scaledImage = pygame.transform.scale(image, (size, size)) 
+        surface.blit(scaledImage, (x, y))
+        ORE_SHEET.draw(surface, 0, 0, x, y, size, size, False)
+        tileHealth = 5 - ceil(self.health * 5)
+        TILE_BREAKING.draw(surface, tileHealth, 0, x, y, size, size, False)
+        return
+
+    def onDamage(self, amount):
+        self.health -= amount
+        self.world.camera.shake(4)
+        if (self.health < 0):
+            self.health = 0
+            self.world.tileMap.replaceTile(self.tileX, self.tileY, Air(self.world, self.tileX, self.tileX))
+            for i in range(0, 10):
+                posX = random.uniform(self.tileX * 80, (self.tileX + 1) * 80)
+                posY = random.uniform(self.tileY * 80, (self.tileY + 1) * 80)
+                particle = Particle(self.world, posX, posY, (115, 62, 57))
+                self.world.addEntity(particle)
+            for i in range(0, 10):
+                posX = random.uniform(self.tileX * 80, (self.tileX + 1) * 80)
+                posY = random.uniform(self.tileY * 80, (self.tileY + 1) * 80)
+                particle = Particle(self.world, posX, posY, (192, 203, 220))
+                self.world.addEntity(particle)
+            self.world.player.onOrePickup()
+        return
+
 
 class Air(Tile):
     def __init__(self, world, tileX, tileY):

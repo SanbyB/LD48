@@ -5,6 +5,7 @@ from animation import Animation
 
 IMAGE_PLAYER = pygame.image.load(os.path.join("Graphics", "Player.png"))
 
+ORE_SHEET = SpriteSheet(pygame.image.load(os.path.join("Graphics", "ore.png")), 1, 1)
 PLAYER_SHEET = SpriteSheet(pygame.image.load(os.path.join("Graphics", "miner.png")), 8, 5)
 PLAYER_BREATHING = Animation(PLAYER_SHEET, 0, 0.1)
 PLAYER_WALKING = Animation(PLAYER_SHEET, 1, 0.2)

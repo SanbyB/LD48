@@ -1,6 +1,6 @@
 
 
-from maps.tile import Rock, Air
+from maps.tile import Rock, Air, Ore
 from math import ceil, floor
 from config import SCREEN_WIDTH, SCREEN_HEIGHT
 import random
@@ -59,7 +59,13 @@ class TileMap:
 
     def generateTile(self, x, y):
         value = random.uniform(0, 1)
-        tile = Rock(self.world, x, y) if value > 0.5 else Air(self.world, x, y)
+        if value > 0.95:
+            tile = Ore(self.world, x, y)
+        elif value > 0.5:
+            tile = Rock(self.world, x, y)
+        else:
+            tile = Air(self.world, x, y)
+        
         return tile
 
     def doesCollide(self, x, y):

@@ -31,6 +31,8 @@ class Player(Physics):
         self.hitCount = 0
         self.equipment = Equipment(world, self)
         self.too_fast = 0  # Fall damage
+        self.score = 0
+
 
     def update(self):
         super().update()

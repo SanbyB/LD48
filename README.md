@@ -8,7 +8,6 @@
 * Inventory equipment
 * E opens inventory to upgrade equipment and takes iron away from total score
 * (Polish) We need a screen for when we die
-* (Polish) Particles for rock breaking and slime dying
 
 ### Idea
 
