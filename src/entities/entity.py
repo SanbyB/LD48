@@ -10,7 +10,6 @@ class Entity(Physics):
         self.world = world
         self.hp = hp
         self.theta0, self.theta1 = None, None
-        self.hit = False
 
     
     def update(self, camera, theta):
@@ -61,15 +60,22 @@ class Entity(Physics):
 
     
     def attacked(self, theta):
-        self.hit = False
 
-        if theta != None:
+        for event in pygame.event.get():
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    print('down')
 
-            if self.theta0 > self.theta1:
-                if theta > self.theta0 or theta < self.theta1:
-                    self.hit = True
-            elif self.theta0 < theta < self.theta1:
-                self.hit = True
+                    if theta != None:
+                        print('and')
+                        
+
+                        if self.theta0 > self.theta1:
+                            if theta > self.theta0 or theta < self.theta1:
+                                print('hit')
+                                self.hp -= 5 
+                        elif self.theta0 < theta < self.theta1:
+                            print('hit')
+                            self.hp -= 5
 
 
     def death(self):

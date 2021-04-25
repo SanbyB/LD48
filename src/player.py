@@ -22,7 +22,7 @@ class Player(Physics):
         self.world = world
         self.didJump = False
         self.hp = 20
-        self.theta = None
+        self.theta = None  # angle of attack
 
     def update(self):
         super().update()
@@ -60,9 +60,6 @@ class Player(Physics):
         super().onHitFloor()
         self.didJump = False
 
-        # TODO dRemove this
-        #self.world.tileMap.damageTile(self.x, self.y + self.height + 20, 0.1)
-
 
     def attack(self):
         mouse = pygame.mouse.get_pressed()
@@ -80,6 +77,9 @@ class Player(Physics):
             targetX = (distance * np.cos(self.theta)) + self.x + self.width / 2
             targetY = -distance * np.sin(self.theta) + self.y + self.height / 2
             self.world.tileMap.damageTile(targetX, targetY, 0.1)
+
+        
+
 
 
 
