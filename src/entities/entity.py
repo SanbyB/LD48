@@ -27,12 +27,23 @@ class Entity(Physics):
         self.move()
         self.death()
 
+    def health_bar(self, screen, camera):
+        if self.hp > 0:
+            colour = (0, 255, 0)
+            if self.hp < 10:
+                colour = (240, 235, 86)
+                if self.hp < 5:
+                    colour = (240, 0 , 0)
+
+            pygame.draw.rect(screen, colour, (self.x - camera.x, self.y - camera.y - (self.height * 0.6), self.hp*2, 5))
+
 
     def render(self, screen, camera):
         xPos = self.x - camera.x
         yPos = self.y - camera.y
         scaledImage = pygame.transform.scale(IMAGE_ENTITY, (self.width, self.height)) 
         screen.blit(scaledImage, (xPos, yPos))
+        self.health_bar(screen, camera)
 
     def ray(self, camera):
         # Targeting the entity

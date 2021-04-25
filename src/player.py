@@ -57,6 +57,19 @@ class Player(Physics):
         self.x_vel = self.x_vel * 0.8
 
 
+    def health_bar(self, screen):
+        if self.hp > 0:
+            colour = (0, 255, 0)
+            if self.hp < 10:
+                colour = (240, 235, 86)
+                if self.hp < 5:
+                    colour = (240, 0 , 0)
+
+            pygame.draw.rect(screen, colour, (SCREEN_WIDTH/2 - 20, SCREEN_HEIGHT/2 - (self.height * 0.6), self.hp*2, 5))
+
+
+
+
     def render(self, screen, camera):
         imageInflate = 12
         xPos = self.x - camera.x - imageInflate
@@ -86,6 +99,8 @@ class Player(Physics):
         else: 
             PLAYER_BREATHING.update()
             PLAYER_BREATHING.draw(screen, xPos, yPos, width, self.height, self.isFlipped)
+
+        self.health_bar(screen)
 
       
 
