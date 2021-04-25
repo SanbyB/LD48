@@ -35,6 +35,7 @@ while True: # main game loop
     inventory.update()
     world.update(cam)
     world.render(DISPLAYSURF, cam)
+    inventory.render(DISPLAYSURF)
     ui.draw(DISPLAYSURF)
     for event in pygame.event.get():
         if event.type == QUIT:
