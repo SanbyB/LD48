@@ -23,6 +23,9 @@ class Player(Physics):
         self.didJump = False
         self.hp = 20
         self.theta = None  # angle of attack
+        self.atk_counter = 0
+        self.atk_speed = 50
+        
 
     def update(self):
         super().update()
@@ -82,11 +85,24 @@ class Player(Physics):
             x_dist = SCREEN_WIDTH/2 - mp[0]
             y_dist = mp[1] - SCREEN_HEIGHT/2
 
-            self.theta = np.angle(x_dist + y_dist * 1j) + np.pi
+            theta = np.angle(x_dist + y_dist * 1j) + np.pi
 
-            targetX = (distance * np.cos(self.theta)) + self.x + self.width / 2
-            targetY = -distance * np.sin(self.theta) + self.y + self.height / 2
+            targetX = (distance * np.cos(theta)) + self.x + self.width / 2
+            targetY = -distance * np.sin(theta) + self.y + self.height / 2
             self.world.tileMap.damageTile(targetX, targetY, 0.1)
+
+            if self.atk_counter == 0:
+                self.theta = theta
+
+            self.atk_counter += 1
+
+        elif self.atk_counter != 0:
+            self.atk_counter += 1
+
+        if self.atk_counter == self.atk_speed:
+            self.atk_counter = 0
+        
+        print(self.atk_counter)
 
         
 
