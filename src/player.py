@@ -1,13 +1,13 @@
 import pygame
 import numpy as np
-from resources import IMAGE_PLAYER
+from resources import PLAYER_BREATHING, PLAYER_WALKING
 from physics import Physics
 from maps.tilemap import TILE_MAP_WIDTH, TILE_SIZE
 from config import SCREEN_WIDTH, SCREEN_HEIGHT
 
 
-WALK_ACCN = 0.5
-WALK_SPEED = 3
+WALK_ACCN = 1.5
+WALK_SPEED = 5
 JUMP_POWER = 12
 
 class Player(Physics):
@@ -15,8 +15,8 @@ class Player(Physics):
         super().__init__(
             (TILE_MAP_WIDTH / 2) * TILE_SIZE,
             -100,
-            50,
-            50
+            40,
+            64
         )
         self.invtry = []
         self.world = world
@@ -51,10 +51,20 @@ class Player(Physics):
 
 
     def render(self, screen, camera):
-        xPos = self.x - camera.x
+        imageInflate = 12
+        xPos = self.x - camera.x - imageInflate
         yPos = self.y - camera.y
-        scaledImage = pygame.transform.scale(IMAGE_PLAYER, (self.width, self.height)) 
-        screen.blit(scaledImage, (xPos, yPos))
+
+        isIdle = abs(self.x_vel) < 0.05
+        isFlipped = self.x_vel < 0
+
+        if isIdle:
+            PLAYER_BREATHING.update()
+            PLAYER_BREATHING.draw(screen, xPos, yPos, self.width + imageInflate * 2, self.height, isFlipped)
+        else:
+            PLAYER_WALKING.update()
+            PLAYER_WALKING.draw(screen, xPos, yPos, self.width + imageInflate * 2, self.height, isFlipped)
+
                 
     def onHitFloor(self):
         super().onHitFloor()

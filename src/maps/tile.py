@@ -49,7 +49,7 @@ class Rock(Tile):
 
         surface.blit(scaledImage, (x, y))
         tileHealth = 5 - ceil(self.health * 5)
-        TILE_BREAKING.draw(surface, tileHealth, 0, x, y, size, size)
+        TILE_BREAKING.draw(surface, tileHealth, 0, x, y, size, size, False)
         return
 
     def onDamage(self, amount):
