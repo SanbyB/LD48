@@ -27,7 +27,7 @@ class Player(Physics):
         self.atk_speed = 50
         self.atk_strength = 3
         self.damage_counter = 0
-        
+        self.isFlipped = False
 
     def update(self):
         super().update()
@@ -63,14 +63,19 @@ class Player(Physics):
         yPos = self.y - camera.y
 
         isIdle = abs(self.x_vel) < 0.05
-        isFlipped = self.x_vel < 0
+
+        if self.x_vel < 0:
+            self.isFlipped = True
+
+        if self.x_vel > 0:
+            self.isFlipped = False
 
         if isIdle:
             PLAYER_BREATHING.update()
-            PLAYER_BREATHING.draw(screen, xPos, yPos, self.width + imageInflate * 2, self.height, isFlipped)
+            PLAYER_BREATHING.draw(screen, xPos, yPos, self.width + imageInflate * 2, self.height, self.isFlipped)
         else:
             PLAYER_WALKING.update()
-            PLAYER_WALKING.draw(screen, xPos, yPos, self.width + imageInflate * 2, self.height, isFlipped)
+            PLAYER_WALKING.draw(screen, xPos, yPos, self.width + imageInflate * 2, self.height, self.isFlipped)
 
                 
     def onHitFloor(self):

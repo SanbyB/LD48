@@ -2,7 +2,6 @@
 
 * Some sort of equipment / weapon which renders next to the player
 * Enemy entity which player can hit
-* Player needs to be able to destroy tiles with same attack
 * Add unique tile for an iron ore for points 
 * Enemy needs to be able to attack the player
 * Player and enemy both need a hitbox
@@ -11,8 +10,9 @@
 * Inventory equipment
 * E opens inventory to upgrade equipment and takes iron away from total score
 * (Polish) We need a screen for when we die
-* (Polish) side walls for tiles
-* (Polish) speed up movement a lot
+* Enemy animation
+* Player and enemy white box when hit
+* Draw score text 
 
 ### Idea
 
