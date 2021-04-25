@@ -5,11 +5,14 @@ from player import Player
 from camera import Camera
 from entities.entity import Entity
 from config import SCREEN_WIDTH, SCREEN_HEIGHT
+from inventory import Inventory
 
 world = World()
 world.addEntity(Entity(4000, -100, 50, 50, world, 20))
 player = Player(world)
 world.player = player
+inventory = Inventory()
+inventory.player = player
 cam = Camera()
 
 pygame.init()
@@ -24,6 +27,7 @@ while True: # main game loop
     pygame.draw.rect(DISPLAYSURF, (0, 0, 0, 255), Rect(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT))
     player.update()
     cam.move(player)
+    inventory.update()
     player.render(DISPLAYSURF, cam)
     world.update(cam)
     world.render(DISPLAYSURF, cam)

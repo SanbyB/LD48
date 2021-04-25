@@ -30,7 +30,7 @@ class Player(Physics):
         self.isFlipped = False
         self.hitCount = 0
         self.equipment = Equipment(world, self)
-        self.too_fast = False  # Fall damage
+        self.too_fast = 0  # Fall damage
 
     def update(self):
         super().update()
@@ -132,11 +132,11 @@ class Player(Physics):
 
 
     def fall_damage(self):
-        if self.y_vel > 7.5:
-            self.too_fast = True
-        if self.too_fast and self.floor:
-            self.onHurt(1)
-            self.too_fast = False
+        if self.y_vel > 8:
+            self.too_fast = self.y_vel
+        if self.too_fast != 0 and self.floor:
+            self.onHurt(self.too_fast/7)
+            self.too_fast = 0
 
 
     def attack(self):
