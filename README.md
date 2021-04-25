@@ -1,8 +1,6 @@
 ### Todo
 
-* Some sort of equipment / weapon which renders next to the player
 * Add unique tile for an iron ore for points 
-* Health bars
 * Cave generation
 * Enemy drops things that are useful
 * Player can take fall damage

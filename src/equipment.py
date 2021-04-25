@@ -26,8 +26,6 @@ class Equipment:
         ang = -HAND_ANGLE + self.swing
         self.targetAngle = (ang if self.player.isFlipped else -ang)
         self.swing = self.swing * 0.8
-        if self.swing < 0.1:
-            self.swing = 0
 
         self.x = self.x + (self.targetX - self.x) * 0.5
         self.y = self.y + (self.targetY - self.y) * 0.5
@@ -51,8 +49,6 @@ class Equipment:
 
 
     def onAttack(self):
-        if self.swing > 0:
-            return
         self.swing = SWING
         return
 
