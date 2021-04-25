@@ -66,7 +66,7 @@ game = Game()
 
 pygame.init()
 DISPLAYSURF = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption('Hello World!')
+pygame.display.set_caption('Craftmine')
 
 clock = pygame.time.Clock()
 

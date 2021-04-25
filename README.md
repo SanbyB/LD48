@@ -4,7 +4,6 @@
 * Enemy drops things that are useful
 * Inventory equipment
 * E opens inventory to upgrade equipment and takes iron away from total score
-* (Polish) We need a screen for when we die
 
 ### Idea
 
