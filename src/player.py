@@ -1,6 +1,6 @@
 import pygame
 import numpy as np
-from resources import PLAYER_BREATHING, PLAYER_WALKING
+from resources import PLAYER_BREATHING, PLAYER_WALKING, PLAYER_JUMPING, PLAYER_FALLING
 from physics import Physics
 from maps.tilemap import TILE_MAP_WIDTH, TILE_SIZE
 from config import SCREEN_WIDTH, SCREEN_HEIGHT
@@ -27,7 +27,7 @@ class Player(Physics):
         self.atk_speed = 50
         self.atk_strength = 3
         self.atk_range = 30000
-        
+        self.isFlipped = False
 
     def update(self):
         super().update()
@@ -62,15 +62,32 @@ class Player(Physics):
         xPos = self.x - camera.x - imageInflate
         yPos = self.y - camera.y
 
-        isIdle = abs(self.x_vel) < 0.05
-        isFlipped = self.x_vel < 0
+        isFalling = self.y_vel > 0.05
+        isJumping = self.y_vel < -0.05
+        isWalking = abs(self.x_vel) > 0.05 and not (isFalling or isJumping)
 
-        if isIdle:
-            PLAYER_BREATHING.update()
-            PLAYER_BREATHING.draw(screen, xPos, yPos, self.width + imageInflate * 2, self.height, isFlipped)
-        else:
+        if self.x_vel < 0:
+            self.isFlipped = True
+
+        if self.x_vel > 0:
+            self.isFlipped = False
+
+        width = self.width + imageInflate * 2
+
+        if isWalking:
             PLAYER_WALKING.update()
-            PLAYER_WALKING.draw(screen, xPos, yPos, self.width + imageInflate * 2, self.height, isFlipped)
+            PLAYER_WALKING.draw(screen, xPos, yPos, width, self.height, self.isFlipped)
+        elif isFalling:
+            PLAYER_FALLING.update()
+            PLAYER_FALLING.draw(screen, xPos, yPos, width, self.height, self.isFlipped)
+        elif isJumping:
+            PLAYER_JUMPING.update()
+            PLAYER_JUMPING.draw(screen, xPos, yPos, width, self.height, self.isFlipped)
+        else: 
+            PLAYER_BREATHING.update()
+            PLAYER_BREATHING.draw(screen, xPos, yPos, width, self.height, self.isFlipped)
+
+      
 
                 
     def onHitFloor(self):
