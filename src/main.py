@@ -6,9 +6,13 @@ from camera import Camera
 from entities.entity import Entity
 from config import SCREEN_WIDTH, SCREEN_HEIGHT
 from inventory import Inventory
+from resources import FONT
+from ui import UI
+
 
 cam = Camera()
 world = World(cam)
+ui = UI(world)
 world.addEntity(Entity(4000, -100, 50, 50, world, 20))
 player = Player(world)
 world.player = player
@@ -31,6 +35,7 @@ while True: # main game loop
     player.render(DISPLAYSURF, cam)
     world.update(cam)
     world.render(DISPLAYSURF, cam)
+    ui.draw(DISPLAYSURF)
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()
@@ -38,4 +43,3 @@ while True: # main game loop
 
     
     pygame.display.update()
-

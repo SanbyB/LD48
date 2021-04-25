@@ -3,7 +3,13 @@ import pygame
 from spritesheet import SpriteSheet
 from animation import Animation
 
+pygame.init()
+
+
 IMAGE_PLAYER = pygame.image.load(os.path.join("Graphics", "Player.png"))
+
+FONT = 0
+FONT = pygame.font.Font(os.path.join("Graphics", "ARCADECLASSIC.TTF"), 72)
 
 ORE_SHEET = SpriteSheet(pygame.image.load(os.path.join("Graphics", "ore.png")), 1, 1)
 PLAYER_SHEET = SpriteSheet(pygame.image.load(os.path.join("Graphics", "miner.png")), 8, 5)
