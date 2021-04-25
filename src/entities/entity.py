@@ -101,7 +101,7 @@ class Entity(Physics):
             
             if xPos**2 + yPos**2 < self.atk_range:
                 if self.atk_counter == 0:
-                    self.world.player.hp -= self.atk_strength
+                    self.world.player.onHitByEntity(self.atk_strength, self.x + self.width/2, self.y + self.height/2)
                 self.atk_counter += 1
                 if self.atk_counter == self.atk_speed:
                     self.atk_counter = 0 

@@ -1,6 +1,6 @@
 import pygame
 import numpy as np
-from resources import PLAYER_BREATHING, PLAYER_WALKING, PLAYER_JUMPING, PLAYER_FALLING
+from resources import PLAYER_BREATHING, PLAYER_WALKING, PLAYER_JUMPING, PLAYER_FALLING, PLAYER_HURT
 from physics import Physics
 from maps.tilemap import TILE_MAP_WIDTH, TILE_SIZE
 from config import SCREEN_WIDTH, SCREEN_HEIGHT
@@ -28,6 +28,7 @@ class Player(Physics):
         self.atk_strength = 3
         self.atk_range = 30000
         self.isFlipped = False
+        self.hitCount = 0
 
     def update(self):
         super().update()
@@ -87,7 +88,11 @@ class Player(Physics):
 
         width = self.width + imageInflate * 2
 
-        if isWalking:
+        if self.hitCount > 0:
+            self.hitCount -= 1
+            PLAYER_HURT.update()
+            PLAYER_HURT.draw(screen, xPos, yPos, width, self.height, self.isFlipped)
+        elif isWalking:
             PLAYER_WALKING.update()
             PLAYER_WALKING.draw(screen, xPos, yPos, width, self.height, self.isFlipped)
         elif isFalling:
@@ -103,11 +108,19 @@ class Player(Physics):
         self.health_bar(screen)
 
       
-
                 
     def onHitFloor(self):
         super().onHitFloor()
         self.didJump = False
+
+
+    def onHitByEntity(self, amount, x, y):
+        self.hp -= amount
+        diffX = self.x - x
+        HIT_AMOUNT = 40
+        self.x_vel += HIT_AMOUNT if diffX > 0 else -HIT_AMOUNT
+        self.hitCount = 10
+        PLAYER_HURT.reset()
 
 
     def attack(self):
