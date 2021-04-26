@@ -4,6 +4,7 @@
 * Enemy drops things that are useful -- slime shoes: bouncy, deduce fall damage, very rare (Easter egg) 
 * Cave generation
 * Balancing game mech
+* Slime AI head toward player
 * Slime and ore spawn rate increasing with depth
 * Background colour gets darker as desends??
 * ESC pause button
