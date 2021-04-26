@@ -22,7 +22,6 @@ class World:
         self.toRemove.clear();
         for entity in self.entities:
             entity.update(camera)
-
             #  Removes entities 8 blocks above player
             try:
                 if entity.yPos/TILE_SIZE < -8:

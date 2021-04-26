@@ -73,6 +73,13 @@ class Entity(Physics):
     def render(self, screen, camera):
         xPos = self.x - camera.x
         yPos = self.y - camera.y
+
+        if abs(xPos - SCREEN_WIDTH / 2) > ((SCREEN_WIDTH / 2) + self.width):
+            return
+
+        if abs(yPos - SCREEN_HEIGHT / 2) > ((SCREEN_HEIGHT / 2) + self.height):
+            return
+
         self.health_bar(screen, camera)
         isJumping = abs(self.y_vel) > 0.05
         isWalking = abs(self.x_vel) > 0.05 and not (isJumping)
