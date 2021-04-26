@@ -57,34 +57,34 @@ TILE_ROCK = {
 BACKGROUND_VOLUME = 0.2
 MAIN_VOLUME = 0.3
 
-SOUND_BIP = pygame.mixer.Sound(os.path.join("Audio", "bip.mp3"))
+SOUND_BIP = pygame.mixer.Sound(os.path.join("Audio", "bip.ogg"))
 SOUND_BIP.set_volume(MAIN_VOLUME)
 
-SOUND_SMOT = pygame.mixer.Sound(os.path.join("Audio", "smot.mp3"))
+SOUND_SMOT = pygame.mixer.Sound(os.path.join("Audio", "smot.ogg"))
 SOUND_SMOT.set_volume(MAIN_VOLUME)
 
-SOUND_FOOTSTEP = pygame.mixer.Sound(os.path.join("Audio", "footstep.mp3"))
+SOUND_FOOTSTEP = pygame.mixer.Sound(os.path.join("Audio", "footstep.ogg"))
 SOUND_FOOTSTEP.set_volume(MAIN_VOLUME)
 
-SOUND_HIT = pygame.mixer.Sound(os.path.join("Audio", "bleurf.mp3"))
+SOUND_HIT = pygame.mixer.Sound(os.path.join("Audio", "bleurf.ogg"))
 SOUND_HIT.set_volume(MAIN_VOLUME)
 
-SOUND_HIT2 = pygame.mixer.Sound(os.path.join("Audio", "hit.mp3"))
+SOUND_HIT2 = pygame.mixer.Sound(os.path.join("Audio", "hit.ogg"))
 SOUND_HIT2.set_volume(MAIN_VOLUME)
 
-SOUND_HIT3 = pygame.mixer.Sound(os.path.join("Audio", "hit2.mp3"))
+SOUND_HIT3 = pygame.mixer.Sound(os.path.join("Audio", "hit2.ogg"))
 SOUND_HIT3.set_volume(MAIN_VOLUME)
 
-SOUND_HIT4 = pygame.mixer.Sound(os.path.join("Audio", "hit3.mp3"))
+SOUND_HIT4 = pygame.mixer.Sound(os.path.join("Audio", "hit3.ogg"))
 SOUND_HIT4.set_volume(MAIN_VOLUME)
 
-SOUND_POINT = pygame.mixer.Sound(os.path.join("Audio", "point.mp3"))
+SOUND_POINT = pygame.mixer.Sound(os.path.join("Audio", "point.ogg"))
 SOUND_POINT.set_volume(MAIN_VOLUME)
 
 
 class Audio():
     def playMusic(self):
-        pygame.mixer.music.load(os.path.join("Audio", "background2.mp3")) 
+        pygame.mixer.music.load(os.path.join("Audio", "background2.ogg")) 
         pygame.mixer.music.set_volume(BACKGROUND_VOLUME)     
         pygame.mixer.music.play(-1,0.0)  
 
