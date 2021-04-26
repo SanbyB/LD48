@@ -79,6 +79,9 @@ class TileMap:
                 xPos = x * TILE_SIZE + TILE_SIZE / 2 - 25
                 yPos = y * TILE_SIZE + TILE_SIZE / 2 - 25
                 self.world.addEntity(Entity(xPos, yPos, 50, 50, self.world, 20))
+
+        if x == TILE_MAP_WIDTH/2 and y == 0:
+            tile = Ore(self.world, x, y)
         
         return tile
 

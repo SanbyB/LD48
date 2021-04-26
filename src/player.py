@@ -50,7 +50,7 @@ class Player(Physics):
         PLAYER_JUMPING.update()
         PLAYER_BREATHING.update()
 
-
+        
 
     def move(self):
         keys = pygame.key.get_pressed()

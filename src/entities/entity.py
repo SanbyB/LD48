@@ -53,7 +53,7 @@ class Entity(Physics):
 
     def power_level(self):
         rng = random.randint(15000, 20000) 
-        strngth = random.randrange(0, 2) + 0.2
+        strngth = random.randrange(1, 2)
 
         self.atk_range = ((self.y/TILE_SIZE) ** 0.3) * rng
         self.atk_strength = ((self.y/TILE_SIZE) ** 0.3) * strngth

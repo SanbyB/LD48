@@ -19,11 +19,11 @@ class UI:
         width = img.get_width()
         height = img.get_height()
 
-        img2 = FONT.render("Press Enter", True, (255, 255, 255))
+        img2 = FONT.render("Press  Enter", True, (255, 255, 255))
         width2 = img2.get_width()
         height2 = img2.get_height()
 
-        img3 = FONT.render("To Start", True, (255, 255, 255))
+        img3 = FONT.render("To  Start", True, (255, 255, 255))
         width3 = img3.get_width()
         height3 = img3.get_height()
 

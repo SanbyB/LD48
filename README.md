@@ -2,15 +2,11 @@
 
 * Sound effects and background music
 * Enemy drops things that are useful -- slime shoes: bouncy, deduce fall damage, very rare (Easter egg) 
-* Cave generation
-* Floor under player at start
 * Balancing game mech
-* Slime AI head toward player
-* Slime and ore spawn rate increasing with depth
 * Background colour gets darker as desends??
 * ESC pause button
 * Fullscreen mode?
-* Instructions -- e opens inventory, maybe "a,d SPACE" to move "left click" to attack ??
+* Instructions -- maybe "a,d SPACE" to move "left click" to attack ??
 * Check installer
 
 ### Idea

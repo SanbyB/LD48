@@ -14,6 +14,7 @@ BUTTON4 = (SCREEN_WIDTH/2 + (WINDOW_WIDTH/2 * 0.1), SCREEN_HEIGHT/2 + (WINDOW_HE
 class Inventory:
     def __init__(self):
         self.open = False
+        self.not_opened = True
         self.player = None
         self.strength_cost = 5
         self.speed_cost = 5
@@ -39,6 +40,7 @@ class Inventory:
 
         if keys[pygame.K_e]:
             self.open = True
+            self.not_opened = False
 
     def upgrade_atk_strength(self):
         if self.player.atk_strength < 8:
@@ -174,6 +176,14 @@ class Inventory:
 
 
     def render(self, screen):
+        if self.not_opened:
+            img = EVEN_SMALLER_FONT.render("Press  e  to  open  inventory", True, (255, 255, 255))
+            width = img.get_width()
+            height = img.get_height()
+
+            pygame.draw.rect(screen, (0, 0, 0), (0, SCREEN_HEIGHT - height, width, height))
+            screen.blit(img, (0, SCREEN_HEIGHT - height))
+
         if self.open:
             pygame.draw.rect(screen, (186, 183, 175), WINDOW)
 

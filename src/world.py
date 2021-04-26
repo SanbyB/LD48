@@ -49,7 +49,8 @@ class World:
         self.tileMap.render(surface, camera) 
         for entity in self.entities:
             entity.render(surface, camera)
-
+            
+            
     def addEntity(self, entity):
         self.toAdd.append(entity)
         try:
