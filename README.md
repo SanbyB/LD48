@@ -1,8 +1,15 @@
 ### Todo
 
 * Sound effects and background music
-* Enemy drops things that are useful
+* Enemy drops things that are useful -- slime shoes: bouncy, deduce fall damage, very rare (Easter egg) 
 * Cave generation
+* Balancing game mech
+* Slime and ore spawn rate increasing with depth
+* Background colour gets darker as desends??
+* ESC pause button
+* Fullscreen mode?
+* Instructions -- e opens inventory, maybe "a,d SPACE" to move "left click" to attack ??
+* Check installer
 
 ### Idea
 
