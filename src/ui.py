@@ -34,19 +34,19 @@ class UI:
         return
 
     def renderDiedScreen(self, surface, highScore):
-        img = FONT.render("You died", True, (200, 200, 200))
+        img = FONT.render("You  died", True, (200, 200, 200))
         width = img.get_width()
         height = img.get_height()
 
-        img2 = SMALLER_FONT.render("Your high score is", True, (255, 255, 255))
+        img2 = SMALLER_FONT.render("Your  high  score  is", True, (255, 255, 255))
         width2 = img2.get_width()
         height2 = img2.get_height()
 
-        img3 = SMALLER_FONT.render(str(highScore) + " points", True, (255, 255, 255))
+        img3 = SMALLER_FONT.render(str(highScore) + "  points", True, (255, 255, 255))
         width3 = img3.get_width()
         height3 = img3.get_height()
 
-        img4 = SMALLER_FONT.render("Press Enter to restart", True, (255, 255, 255))
+        img4 = SMALLER_FONT.render("Press  Enter  to  restart", True, (255, 255, 255))
         width4 = img4.get_width()
         height4 = img4.get_height()
 

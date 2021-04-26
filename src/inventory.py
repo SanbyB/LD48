@@ -16,9 +16,9 @@ class Inventory:
         self.open = False
         self.not_opened = True
         self.player = None
-        self.strength_cost = 5
-        self.speed_cost = 5
-        self.range_cost = 3
+        self.strength_cost = 3
+        self.speed_cost = 3
+        self.range_cost = 2
         self.health_cost = 2
         self.click = True
         self.strength_max = False

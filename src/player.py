@@ -50,7 +50,7 @@ class Player(Physics):
         PLAYER_JUMPING.update()
         PLAYER_BREATHING.update()
 
-        
+
 
     def move(self):
         keys = pygame.key.get_pressed()
@@ -129,7 +129,7 @@ class Player(Physics):
 
     def onHitByEntity(self, amount, x, y):
         diffX = self.x - x
-        HIT_AMOUNT = 40
+        HIT_AMOUNT = 15
         self.x_vel += HIT_AMOUNT if diffX > 0 else -HIT_AMOUNT
         self.onHurt(amount)
 

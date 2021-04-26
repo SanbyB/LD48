@@ -143,7 +143,7 @@ class Entity(Physics):
         self.hitCount = 10
         self.slime_hurt.reset()
         diffX = self.x -  self.world.player.x
-        HIT_AMOUNT = 20
+        HIT_AMOUNT = 15
         self.x_vel += HIT_AMOUNT if diffX > 0 else -HIT_AMOUNT
         for i in range(0, 10):
             particle = Particle(self.world, self.x + self.width / 2, self.y + self.height / 2, (99, 199, 77))
