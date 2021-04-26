@@ -142,8 +142,8 @@ class Player(Physics):
 
     def onHitByEntity(self, amount, x, y):
         diffX = self.x - x
-        HIT_AMOUNT = 15
-        self.x += HIT_AMOUNT if diffX > 0 else -HIT_AMOUNT
+        HIT_AMOUNT = 10
+        self.x_vel += HIT_AMOUNT if diffX > 0 else -HIT_AMOUNT
         self.onHurt(amount)
 
     def onHurt(self, amount):
