@@ -1,6 +1,6 @@
 import pygame
 import numpy as np
-from resources import PLAYER_BREATHING, PLAYER_WALKING, PLAYER_JUMPING, PLAYER_FALLING, PLAYER_HURT
+from resources import PLAYER_BREATHING, PLAYER_WALKING, PLAYER_JUMPING, PLAYER_FALLING, PLAYER_HURT, audio
 from physics import Physics
 from maps.tilemap import TILE_MAP_WIDTH, TILE_SIZE
 from config import SCREEN_WIDTH, SCREEN_HEIGHT
@@ -33,6 +33,7 @@ class Player(Physics):
         self.equipment = Equipment(world, self)
         self.too_fast = 0  # Fall damage
         self.score = 0
+        self.stepFreq = 0
 
 
     def onOrePickup(self):
@@ -69,10 +70,19 @@ class Player(Physics):
     
 
         if keys[pygame.K_SPACE] and not self.didJump:
+            audio.onJump()
             self.didJump = True
             self.y_vel = -JUMP_POWER
 
         self.x_vel = self.x_vel * 0.8
+
+
+    def playMove(self):
+        if self.stepFreq == 0:
+            audio.onStep()
+            self.stepFreq = 20
+        else:
+            self.stepFreq -= 1
 
 
     def health_bar(self, screen):
@@ -109,6 +119,7 @@ class Player(Physics):
             self.hitCount -= 1
             PLAYER_HURT.draw(screen, xPos, yPos, width, self.height, self.isFlipped)
         elif isWalking:
+            self.playMove()
             PLAYER_WALKING.draw(screen, xPos, yPos, width, self.height, self.isFlipped)
         elif isFalling:
             PLAYER_FALLING.draw(screen, xPos, yPos, width, self.height, self.isFlipped)
@@ -125,6 +136,8 @@ class Player(Physics):
     def onHitFloor(self):
         super().onHitFloor()
         self.didJump = False
+        if abs(self.y_vel) > 0.2:
+            audio.onDrop()
 
 
     def onHitByEntity(self, amount, x, y):
@@ -139,7 +152,11 @@ class Player(Physics):
         PLAYER_HURT.reset()
         self.world.camera.shake(10)
         if (self.hp < 0):
+            audio.onPlayerHit()
             self.onPlayerDead()
+        else:
+            audio.onPlayerDead()
+
 
 
     def fall_damage(self):

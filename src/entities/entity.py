@@ -1,4 +1,4 @@
-from resources import SLIME_SHEET
+from resources import SLIME_SHEET, audio
 from physics import Physics
 import pygame
 import numpy as np
@@ -152,6 +152,7 @@ class Entity(Physics):
         diffX = self.x -  self.world.player.x
         HIT_AMOUNT = 15
         self.x_vel += HIT_AMOUNT if diffX > 0 else -HIT_AMOUNT
+        audio.onSlimeHit()
         for i in range(0, 10):
             particle = Particle(self.world, self.x + self.width / 2, self.y + self.height / 2, (99, 199, 77))
             self.world.addEntity(particle)
@@ -200,6 +201,7 @@ class Entity(Physics):
 
     def death(self):
         if self.hp <= 0:
+            audio.onSlimeDead()
             self.world.removeEntity(self)
             self.world.player.score += 1
             for i in range(0, 20):

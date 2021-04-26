@@ -1,6 +1,6 @@
 import pygame
 from config import SCREEN_HEIGHT, SCREEN_WIDTH
-from resources import  EVEN_SMALLER_FONT
+from resources import  EVEN_SMALLER_FONT, audio
 
 
 WINDOW_WIDTH, WINDOW_HEIGHT = SCREEN_WIDTH/1.3, SCREEN_HEIGHT/1.5
@@ -43,6 +43,7 @@ class Inventory:
             self.not_opened = False
 
     def upgrade_atk_strength(self):
+        audio.onBuy()
         if self.player.atk_strength < 8:
             if self.player.score >= self.strength_cost:
                 self.player.score -= self.strength_cost
@@ -52,6 +53,7 @@ class Inventory:
             self.strength_max = True
         
     def upgrade_atk_speed(self):
+        audio.onBuy()
         if self.player.atk_speed > 15:
             if self.player.score >= self.speed_cost:
                 self.player.score -= self.speed_cost
@@ -61,6 +63,7 @@ class Inventory:
             self.speed_max = True
 
     def upgrade_atk_range(self):
+        audio.onBuy()
         if self.player.atk_range < 50000:
             if self.player.score >= self.range_cost:
                 self.player.score -= self.range_cost
@@ -70,6 +73,7 @@ class Inventory:
             self.range_max = True
 
     def recover_health(self):
+        audio.onBuy()
         if self.player.hp <= 15:
             if self.player.score >= self.health_cost:
                 self.player.score -= self.health_cost
