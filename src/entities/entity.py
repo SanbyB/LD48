@@ -22,7 +22,7 @@ class Entity(Physics):
         self.atk_counter = 0
         self.atk_speed = 50
         self.atk_strength = 2
-        self.atk_range = 20000
+        self.atk_range = 10000
         self.slime_breathing = Animation(SLIME_SHEET, 0, 0.1)
         self.slime_walking = Animation(SLIME_SHEET, 1, 0.2)
         self.slime_jumping = Animation(SLIME_SHEET, 3, 0.2)
@@ -52,10 +52,8 @@ class Entity(Physics):
 
 
     def power_level(self):
-        rng = random.randint(15000, 20000) 
         strngth = random.randrange(1, 2) - 0.6
 
-        self.atk_range = ((self.y/TILE_SIZE) ** 0.2) * rng
         self.atk_strength = ((self.y/TILE_SIZE) ** 0.2) * strngth
 
 
