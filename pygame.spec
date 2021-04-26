@@ -4,11 +4,11 @@
 block_cipher = None
 
 
-a = Analysis(['src\\main.py'],
+a = Analysis(['pygame', 'src\\main.py'],
              pathex=['C:\\Users\\bensa\\LD48\\LD48'],
              binaries=[],
              datas=[],
-             hiddenimports=['pygame'],
+             hiddenimports=[''],
              hookspath=[],
              runtime_hooks=[],
              excludes=[],
@@ -24,7 +24,7 @@ exe = EXE(pyz,
           a.zipfiles,
           a.datas,
           [],
-          name='main',
+          name='pygame',
           debug=False,
           bootloader_ignore_signals=False,
           strip=False,

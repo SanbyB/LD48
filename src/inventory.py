@@ -73,7 +73,8 @@ class Inventory:
         if self.player.hp <= 15:
             if self.player.score >= self.health_cost:
                 self.player.score -= self.health_cost
-                self.health_cost += 1
+                if self.health_cost < 3:
+                    self.health_cost += 1
                 self.player.hp += 5
 
 
