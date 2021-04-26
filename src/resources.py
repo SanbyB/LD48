@@ -54,7 +54,7 @@ TILE_ROCK = {
 }
 
 
-BACKGROUND_VOLUME = 0.2
+BACKGROUND_VOLUME = 0
 MAIN_VOLUME = 0.3
 
 SOUND_BIP = pygame.mixer.Sound(os.path.join("Audio", "bip.ogg"))
