@@ -84,7 +84,7 @@ SOUND_POINT.set_volume(MAIN_VOLUME)
 
 class Audio():
     def playMusic(self):
-        pygame.mixer.music.load(os.path.join("Audio", "background.mp3")) 
+        pygame.mixer.music.load(os.path.join("Audio", "background2.mp3")) 
         pygame.mixer.music.set_volume(BACKGROUND_VOLUME)     
         pygame.mixer.music.play(-1,0.0)  
 
