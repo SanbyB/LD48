@@ -8,7 +8,7 @@ import random
 import pygame
 
 TILE_MAP_WIDTH = 20
-TILE_SIZE = 80
+TILE_SIZE = 80  # Note I've changed this in the entities file too
 
 class TileMap:
     def __init__(self, world):
@@ -69,13 +69,13 @@ class TileMap:
 
     def generateTile(self, x, y):
         value = random.uniform(0, 1)
-        if value > 0.95:
+        if value > max(0.99 - (0.02 * y**0.7), 0.85):
             tile = Ore(self.world, x, y)
         elif value > 0.5:
             tile = Rock(self.world, x, y)
         else:
             tile = Air(self.world, x, y)
-            if value < 0.05:
+            if value < min(0.03 * (y**0.2), 0.1):
                 xPos = x * TILE_SIZE + TILE_SIZE / 2 - 25
                 yPos = y * TILE_SIZE + TILE_SIZE / 2 - 25
                 self.world.addEntity(Entity(xPos, yPos, 50, 50, self.world, 20))

@@ -23,6 +23,13 @@ class World:
         for entity in self.entities:
             entity.update(camera)
 
+            #  Removes entities 8 blocks above player
+            try:
+                if entity.yPos/TILE_SIZE < -8:
+                    self.removeEntity(entity)
+            except:
+                pass
+
 
     def render(self, surface, camera):   
         
@@ -45,6 +52,11 @@ class World:
 
     def addEntity(self, entity):
         self.toAdd.append(entity)
+        try:
+            entity.power_level()
+        except:
+            pass
+
 
     def removeEntity(self, entity):
         self.toRemove.append(entity)

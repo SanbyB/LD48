@@ -8,6 +8,9 @@ from animation import Animation
 from particle import Particle
 
 
+TILE_SIZE = 80
+
+
 class Entity(Physics):
     def __init__(self, x, y, width, height, world, hp):
         super().__init__(x, y, width, height)
@@ -26,22 +29,34 @@ class Entity(Physics):
         self.slime_hurt = Animation(SLIME_SHEET, 2, 0.2)  
         self.isFlipped = False     
         self.hitCount = 0
+        self.view_dist = 40000
+        self.xPos = self.x
+        self.yPos = self.y
 
     
     def update(self, camera):
         super().update()
         theta = self.world.player.theta
         strength = self.world.player.atk_strength
-        self.ray(camera)
-        self.attacked(theta, strength, camera)
-        self.attack(camera)
+        self.ray()
+        self.attacked(theta, strength)
+        self.attack()
         self.move()
         self.death()
         self.slime_hurt.update()
         self.slime_walking.update()
         self.slime_jumping.update()
         self.slime_breathing.update()
+        self.xPos = self.x - camera.x - SCREEN_WIDTH/2 + self.width/2
+        self.yPos = self.y - camera.y - SCREEN_HEIGHT/2 + self.height/2
 
+
+    def power_level(self):
+        rng = random.randint(15000, 20000) 
+        strngth = random.randrange(0, 2) + 0.2
+
+        self.atk_range = ((self.y/TILE_SIZE) ** 0.3) * rng
+        self.atk_strength = ((self.y/TILE_SIZE) ** 0.3) * strngth
 
 
     def health_bar(self, screen, camera):
@@ -79,11 +94,8 @@ class Entity(Physics):
             self.slime_breathing.draw(screen, xPos, yPos, self.width, self.height, self.isFlipped)
 
 
-    def ray(self, camera):
+    def ray(self):
         # Targeting the entity
-
-        xPos = self.x - camera.x - SCREEN_WIDTH/2 + self.width/2
-        yPos = -(self.y - camera.y) + SCREEN_HEIGHT/2 - self.width/2
 
         '''
         The positive, positive quadrant and the negative, negative quadrant 
@@ -94,30 +106,28 @@ class Entity(Physics):
         x0, y0, x1, y1 = 0, 0, 0, 0
 
         
-        if yPos >= 0:
-            x0 = xPos + self.width/2
-            x1 = xPos - self.width/2
+        if -self.yPos >= 0:
+            x0 = self.xPos + self.width/2
+            x1 = self.xPos - self.width/2
         else:
-            x0 = xPos - self.width/2
-            x1 = xPos + self.width/2
+            x0 = self.xPos - self.width/2
+            x1 = self.xPos + self.width/2
 
-        if xPos >= 0:
-            y0 = yPos - self.height/2
-            y1 = yPos + self.height/2
+        if self.xPos >= 0:
+            y0 = -self.yPos - self.height/2
+            y1 = -self.yPos + self.height/2
         else:
-            y0 = yPos + self.height/2
-            y1 = yPos - self.height/2
+            y0 = -self.yPos + self.height/2
+            y1 = -self.yPos - self.height/2
 
         
         self.theta0 = np.angle(-x0 - y0 * 1j) + np.pi
         self.theta1 = np.angle(-x1 - y1 * 1j) + np.pi
 
     
-    def attacked(self, theta, strength, camera):
-        xPos = self.x - camera.x - SCREEN_WIDTH/2 + self.width/2
-        yPos = self.y - camera.y - SCREEN_HEIGHT/2 + self.height/2
+    def attacked(self, theta, strength):
 
-        if xPos**2 + yPos**2 < self.world.player.atk_range:
+        if self.xPos**2 + self.yPos**2 < self.world.player.atk_range:
 
             if theta != None:  
                 if self.theta0 > self.theta1:
@@ -140,12 +150,10 @@ class Entity(Physics):
             self.world.addEntity(particle)
         self.world.camera.shake(5)
 
-    def attack(self, camera):
+    def attack(self):
         if self.world.player != None:
-            xPos = self.x - camera.x - SCREEN_WIDTH/2 + self.width/2
-            yPos = self.y - camera.y - SCREEN_HEIGHT/2 + self.height/2
             
-            if xPos**2 + yPos**2 < self.atk_range:
+            if self.xPos**2 + self.yPos**2 < self.atk_range:
                 if self.atk_counter == 0:
                     self.world.player.onHitByEntity(self.atk_strength, self.x + self.width/2, self.y + self.height/2)
                 self.atk_counter += 1
@@ -174,6 +182,13 @@ class Entity(Physics):
             self.y_vel = -10
 
         self.x_vel = self.x_vel * 0.99
+
+        if self.xPos**2 + self.yPos**2 < self.view_dist and abs(self.xPos) > 100:
+            if self.xPos < 0:
+                self.x_vel = 2.5
+            else:
+                self.x_vel = -2.5
+
     
 
     def death(self):
