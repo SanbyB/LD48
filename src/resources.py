@@ -89,16 +89,17 @@ class Audio():
         pygame.mixer.music.play(-1,0.0)  
 
     def onRockHit(self):
-        SOUND_BIP.play()
+        SOUND_SMOT.play()
     
     def onRockBreak(self):
         SOUND_SMOT.play()
 
     def onOreHit(self):
-        SOUND_BIP.play()
+        SOUND_SMOT.play()
     
     def onOreBreak(self):
         SOUND_SMOT.play()
+        SOUND_POINT.play()
         
     def onSlimeHit(self):
         SOUND_HIT2.play()
@@ -118,6 +119,11 @@ class Audio():
     def onStep(self):
         SOUND_FOOTSTEP.play()
 
+    def onJump(self):
+        SOUND_FOOTSTEP.play()
+    
+    def onDrop(self):
+        SOUND_FOOTSTEP.play()
 
 
 
