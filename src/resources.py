@@ -54,7 +54,7 @@ TILE_ROCK = {
 }
 
 
-BACKGROUND_VOLUME = 0.2
+BACKGROUND_VOLUME = 0
 MAIN_VOLUME = 0.3
 
 SOUND_BIP = pygame.mixer.Sound(os.path.join("Audio", "bip.ogg"))
@@ -84,9 +84,10 @@ SOUND_POINT.set_volume(MAIN_VOLUME)
 
 class Audio():
     def playMusic(self):
-        pygame.mixer.music.load(os.path.join("Audio", "background2.ogg")) 
-        pygame.mixer.music.set_volume(BACKGROUND_VOLUME)     
-        pygame.mixer.music.play(-1,0.0)  
+        return;
+        # pygame.mixer.music.load(os.path.join("Audio", "background2.ogg")) 
+        # pygame.mixer.music.set_volume(BACKGROUND_VOLUME)     
+        # pygame.mixer.music.play(-1,0.0)  
 
     def onRockHit(self):
         SOUND_SMOT.play()
