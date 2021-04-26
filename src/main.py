@@ -6,7 +6,7 @@ from camera import Camera
 from entities.entity import Entity
 from config import SCREEN_WIDTH, SCREEN_HEIGHT
 from inventory import Inventory
-from resources import FONT
+from resources import FONT, audio
 from ui import UI
 from maps.tilemap import TILE_MAP_WIDTH, TILE_SIZE
 
@@ -66,6 +66,10 @@ class Game:
 game = Game()
 
 pygame.init()
+pygame.mixer.init()
+
+audio.playMusic()
+
 DISPLAYSURF = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption('Craftmine')
 

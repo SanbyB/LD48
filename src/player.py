@@ -1,6 +1,6 @@
 import pygame
 import numpy as np
-from resources import PLAYER_BREATHING, PLAYER_WALKING, PLAYER_JUMPING, PLAYER_FALLING, PLAYER_HURT
+from resources import PLAYER_BREATHING, PLAYER_WALKING, PLAYER_JUMPING, PLAYER_FALLING, PLAYER_HURT, audio
 from physics import Physics
 from maps.tilemap import TILE_MAP_WIDTH, TILE_SIZE
 from config import SCREEN_WIDTH, SCREEN_HEIGHT
@@ -139,7 +139,11 @@ class Player(Physics):
         PLAYER_HURT.reset()
         self.world.camera.shake(10)
         if (self.hp < 0):
+            audio.onPlayerHit()
             self.onPlayerDead()
+        else:
+            audio.onPlayerDead()
+
 
 
     def fall_damage(self):

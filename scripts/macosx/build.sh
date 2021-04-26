@@ -1,3 +1,3 @@
-rm -rf dist
-rm -rf build
-sudo pyinstaller src/main.py --onefile --no-console
+sudo rm -rf dist
+sudo rm -rf build
+sudo pyinstaller src/main.py --onefile --hidden-import pygame

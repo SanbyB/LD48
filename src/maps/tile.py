@@ -1,6 +1,6 @@
 import pygame
 from pygame import Rect
-from resources import TILE_ROCK, TILE_BREAKING, ORE_SHEET
+from resources import TILE_ROCK, TILE_BREAKING, ORE_SHEET, audio
 import random
 from math import ceil, floor
 from particle import Particle
@@ -53,6 +53,7 @@ class Rock(Tile):
         self.health -= amount
         self.world.camera.shake(4)
         if (self.health < 0):
+            audio.onRockBreak()
             self.health = 0
             self.world.tileMap.replaceTile(self.tileX, self.tileY, Air(self.world, self.tileX, self.tileX))
             for i in range(0, 10):
@@ -60,6 +61,8 @@ class Rock(Tile):
                 posY = random.uniform(self.tileY * 80, (self.tileY + 1) * 80)
                 particle = Particle(self.world, posX, posY, (115, 62, 57))
                 self.world.addEntity(particle)
+        else:
+            audio.onRockHit()
         return
 
 class Ore(Tile):
@@ -80,6 +83,7 @@ class Ore(Tile):
         self.health -= amount
         self.world.camera.shake(4)
         if (self.health < 0):
+            audio.onOreBreak()
             self.health = 0
             self.world.tileMap.replaceTile(self.tileX, self.tileY, Air(self.world, self.tileX, self.tileX))
             for i in range(0, 10):
@@ -93,6 +97,8 @@ class Ore(Tile):
                 particle = Particle(self.world, posX, posY, (192, 203, 220))
                 self.world.addEntity(particle)
             self.world.player.onOrePickup()
+        else:
+            audio.onOreHit()
         return
 
 
